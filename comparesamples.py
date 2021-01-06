@@ -33,16 +33,16 @@ def comparesamples(samples1, samples2, weights = 1, summary = 'd', analysis = 'x
                 data1[value][element] = 0
                 data2[value][element] = 0
 
-                if analysis == 'x':
-                    d = data1[value][element] - data2[value][element]
+             if analysis == 'x':
+                d = data1[value][element] - data2[value][element]
 
-                if analysis == 'y':
-                    d = (data1[value][element] - data2[value][element])**2
+             if analysis == 'y':
+                d = (data1[value][element] - data2[value][element])**2
 
-                if w == 1:
-                    s += w * abs(d)
-                else:
-                    s += w[0][element] * abs(d)
+              if w == 1:
+                s += w * abs(d)
+              else:
+                s += w[0][element] * abs(d)
 
         if analysis == 'x':          
             results.append(s)
