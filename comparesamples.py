@@ -5,6 +5,13 @@ from argparse import ArgumentParser
 
 def comparesamples(samples1, samples2, weights = 1, summary = 'd', analysis = 'x', threshold = 5):
     
+    # User specifies an unrecognised analysis method or summary measure
+    if summary != 'd' and summary != 'criticality':
+        raise Exception('The defined summary does not exist')
+
+    if analysis != 'x' and analysis != 'y':
+        raise Exception('The defined analysis does not exist')
+
     # Function reading the .csv files (samples and weights data) and prepare data for the analyses
     def data_read (file):
         with open (file) as file:
@@ -20,29 +27,53 @@ def comparesamples(samples1, samples2, weights = 1, summary = 'd', analysis = 'x
     # Recall the function
     data1 = data_read(samples1)
     data2 = data_read(samples2)
+    # Default case for weights
     if weights == 1:
         w = 1
+    # Otherwise recall the function
     else:
         w = data_read(weights)
     
+    # Case of two locations with different number of samples or features - count the number of elements in data1 and data2
+    count1 = 0
+    count2 = 0
+    for listElem1 in data1:
+        count1 += len(listElem1)
+    for listElem2 in data2:
+        count2 += len(listElem2)
+    if count1 != count2:
+        raise Exception('The two locations have different number of samples or features')
+
+    # Case of number of weights not matching the number of features
+    number_of_features1 = count1/len(data1)
+    number_of_features2 = count2/len(data2)
+
+    if w != 1 and (len(w) != number_of_features1 or len(w) != number_of_features2):
+        raise Exception('Number of weights not matching the number of features')
+
+    
     results = []
-    for value in range(len(data1)):
+    for sample in range(len(data1)):
         s = 0
-        for element in range(len(data1)):
-            if isnan(data1[value][element]) or isnan(data2[value][element]):
-                data1[value][element] = 0
-                data2[value][element] = 0
+        for feature in range(len(data1)):
+            if isnan(data1[sample][feature]) or isnan(data2[sample][feature]):
+                data1[sample][feature] = 0
+                data2[sample][feature] = 0
 
-             if analysis == 'x':
-                d = data1[value][element] - data2[value][element]
+            if analysis == 'x':
+                    d = data1[sample][feature] - data2[sample][feature]
 
-             if analysis == 'y':
-                d = (data1[value][element] - data2[value][element])**2
+            if analysis == 'y':
+                    d = (data1[sample][feature] - data2[sample][feature])**2
 
-              if w == 1:
+            if w == 1:
                 s += w * abs(d)
-              else:
-                s += w[0][element] * abs(d)
+            else:
+                # Case of negative weights
+                if w[0][feature] < 0:
+                    raise ValueError('You cannot have negative weights')
+                else:
+                    s += w[0][feature] * abs(d)
 
         if analysis == 'x':          
             results.append(s)
@@ -50,7 +81,7 @@ def comparesamples(samples1, samples2, weights = 1, summary = 'd', analysis = 'x
             discr = sqrt(s)
             results.append(round(discr,2))
                 
-# Criticality - number of elements in the sample difference vector exceeding a threshold value 
+    # Criticality - number of elements in the sample difference vector exceeding a threshold value 
     critical = 0
     for result in results:
         if result > threshold:
