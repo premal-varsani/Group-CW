@@ -1,0 +1,31 @@
+workflow_name1:
+    algorithm: 'x'
+    summary: 'criticality'
+    samples:
+    - 'data1.csv'
+    - 'data2.csv'
+    weights: 'weights.csv'
+
+workflow_name2:
+    algorithm: 'y'
+    summary: 'criticality'
+    samples:
+    - 'data1.csv'
+    - 'data2.csv'
+    weights: 'weights.csv'
+
+workflow_name3:
+    algorithm: 'x'
+    summary: 'd'
+    samples:
+    - 'data1.csv'
+    - 'data2.csv'
+    weights: 'weights.csv'
+    
+workflow_name4:
+    algorithm: 'y'
+    summary: 'd'
+    samples:
+    - 'data1.csv'
+    - 'data2.csv'
+    weights: 'weights.csv'
