@@ -7,8 +7,7 @@ from argparse import ArgumentParser
 def load_file(path):
 
     if len(path) != 2:
-        raise ValueError('Incorrect number of input files')
-
+        raise ValueError('The input path should be file1_path, file2_path')
     res = []
     for p in path:
         with open(p) as file:
@@ -34,16 +33,11 @@ def load_weight(path):
         w = []
         for n in linew.split(','):
             w.append(float(n.strip()))
-    return w
+    return np.asarray(w)
 
-def analyse(input_data, weight_data, analysis = 'x', summary = 'd', cri = '5'):
+def analyse(input_data, weight_data, analysis = 'x', summary = 'd', cri = 5):
     
-    if len(weight_data) != input_data.shape[2]:
-        raise ValueError('The weight input doesnt match feature length')
-    if not all(i >= 0 for i in weight_data):
-        raise ValueError('One of the weights is negative')
-    if len(input_data) != 2:
-        raise ValueError('Incorrect number of input files')
+    check_input(input_data, weight_data, analysis, summary, cri)
 
     if analysis == "x":
         d = analysis_x(input_data, weight_data)
@@ -60,14 +54,44 @@ def analyse(input_data, weight_data, analysis = 'x', summary = 'd', cri = '5'):
 
     return res
 
-def analysis_x(input_data, weight_data):
+def check_input(input_data=[], weight_data=[], analysis=[], summary=[], cri=[]):
 
-    if len(weight_data) != input_data.shape[2]:
-        raise ValueError('The weight input doesnt match feature length')
-    if not all(i >= 0 for i in weight_data):
-        raise ValueError('One of the weights is negative')
     if len(input_data) != 2:
         raise ValueError('Incorrect number of input files')
+
+    if isinstance(weight_data, int) or isinstance(weight_data, float):
+        if weight_data < 0:
+            raise ValueError('weights should be all positive')
+    elif isinstance(weight_data, np.ndarray):
+        if not all(i >= 0 for i in weight_data):
+            raise ValueError('weights should be all positive')
+        if len(weight_data) != input_data.shape[2]:
+            raise ValueError('weight input doesnt match feature length')
+    else:
+        raise ValueError('Weights should be either an int(float) or list of int(float)')
+    
+
+    if isinstance(cri, int) or isinstance(cri, float):
+        pass
+    else:
+        raise ValueError('cri option should be either int or float number')
+    
+    if analysis != 'x' and analysis != 'y':
+        raise ValueError('analysis option should either be x or y')
+
+    if summary != 'd' and summary != 'criticality':
+        raise ValueError('summary option should either be d or criticality')
+
+    return True
+
+def analysis_x(input_data, weight_data):
+
+    # if len(weight_data) != input_data.shape[2]:
+    #     raise ValueError('The weight input doesnt match feature length')
+    # if not all(i >= 0 for i in weight_data):
+    #     raise ValueError('One of the weights is negative')
+    # if len(input_data) != 2:
+    #     raise ValueError('Incorrect number of input files')
 
     res = weight_data * np.abs(input_data[0] - input_data[1])
     res = np.nansum(res, axis=1)
@@ -76,14 +100,14 @@ def analysis_x(input_data, weight_data):
 def analysis_y(input_data, weight_data):
 
 
-    if len(weight_data) != input_data.shape[2]:
-        raise ValueError('The weight input doesnt match feature length')
-    if not all(i >= 0 for i in weight_data):
-        raise ValueError('One of the weights is negative')
-    if len(input_data) != 2:
-        raise ValueError('Incorrect number of input files')
-    if len(input_data[0]) != len(input_data[1]):
-        raise ValueError('The two locations have ahve different sample numbers')   
+    # if len(weight_data) != input_data.shape[2]:
+    #     raise ValueError('The weight input doesnt match feature length')
+    # if not all(i >= 0 for i in weight_data):
+    #     raise ValueError('One of the weights is negative')
+    # if len(input_data) != 2:
+    #     raise ValueError('Incorrect number of input files')
+    # if len(input_data[0]) != len(input_data[1]):
+    #     raise ValueError('The two locations have ahve different sample numbers')   
 
     res = weight_data * (input_data[0] - input_data[1])**2
     res = np.nansum(res, axis=1)
