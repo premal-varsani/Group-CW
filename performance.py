@@ -71,7 +71,6 @@ if __name__ == "__main__":
     plt.xlabel('No. of features')
     plt.show()
     plt.savefig("time_features.png")
-#Try plot x samples, but this time the no. of features ranges
 
     samples = []
     times1 = []
