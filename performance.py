@@ -8,7 +8,7 @@ import timeit
 from timeit import repeat
 from matplotlib import pyplot as plt
 import numpy as np
-from comparesamples import analyse, analysis_x, analysis_y, summary_cri, summary_d
+from comparesamples import analysis_x, analysis_y, summary_cri, summary_d
 
 # Only have done analysis_x and d, needs more modification to include rest.
 
