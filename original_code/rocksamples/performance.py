@@ -40,19 +40,18 @@ def linear_time():
     """
     A function which computes the linear search time
     """ 
-    SETUP_CODE = ''' 
-    
-    from __main__ import analysis_x 
-    from __main__ import summary_d 
-    from __main__ import speed
-    from __main__ import feature
-    '''
+    SETUP_CODE = '\n'.join((
+    'from __main__ import analysis_x', 
+    'from __main__ import summary_d', 
+    'from __main__ import speed',
+    'from __main__ import feature',
+    ))
     #the timeit.repeat module will take SETUP_CODE as the second argument and takes the modules used in the main computation    
     
-    TEST_CODE = ''' 
-    
-    speed(feature)
-    '''
+    TEST_CODE = '''
+speed(feature)
+'''
+
     #the timeit.repeat module will take TEST_CODE as the first argument for which we measure the execution time  
     
     time = timeit.repeat(stmt=TEST_CODE, setup=SETUP_CODE, repeat=1, number = 1) #this line of code uses the timeit module to time how long it takes to run the code
