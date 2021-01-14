@@ -3,6 +3,7 @@ import numpy as np
 import yaml
 from argparse import ArgumentParser
 
+# t test
 def load_file(path):
     """ 
     Open .csv files holding samples' data and put them into two arrays.
@@ -25,8 +26,8 @@ def load_file(path):
     ValueError
          If the arrays have different number of columns
     """
-    #if len(path) != 2:
-        # raise ValueError('The input path should be file1_path, file2_path')
+    if len(path) != 2:
+        raise ValueError('The input path should be file1_path, file2_path')
     res = []
     for p in path:
         with open(p) as file:
@@ -164,8 +165,8 @@ def check_input(input_data=[], weight_data=[], analysis=[], summary=[], cri=[]):
         raise ValueError('Incorrect number of input files')
 
     if isinstance(weight_data, int) or isinstance(weight_data, float):
-        #if weight_data < 0:
-            #raise ValueError('weights should be all positive')
+        if weight_data < 0:
+            raise ValueError('weights should be all positive')
     elif isinstance(weight_data, np.ndarray):
         if not all(i >= 0 for i in weight_data):
             raise ValueError('weights should be all positive')
