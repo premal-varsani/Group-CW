@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sphinx-autogen &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="sphinx-autogen">
+<h1>sphinx-autogen<a class="headerlink" href="#sphinx-autogen" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>sphinx-autogen</strong> [<em>options</em>] &lt;sourcefile&gt; …</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><strong class="program">sphinx-autogen</strong> is a tool for automatic generation of Sphinx sources
+that, using the <code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autodoc</span></code> extension, document items included in
+<a class="reference internal" href="../usage/extensions/autosummary.html#directive-autosummary" title="autosummary directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autosummary</span></code></a> listing(s).</p>
+<p><em>sourcefile</em> is the path to one or more reStructuredText documents containing
+<a class="reference internal" href="../usage/extensions/autosummary.html#directive-autosummary" title="autosummary directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autosummary</span></code></a> entries with the <code class="docutils literal notranslate"><span class="pre">:toctree::</span></code> option set. <em>sourcefile</em>
+can be an <code class="xref py py-mod docutils literal notranslate"><span class="pre">fnmatch</span></code>-style pattern.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="std option">
+<dt id="cmdoption-sphinx-autogen-o">
+<code class="sig-name descname">-o</code><code class="sig-prename descclassname"> &lt;outputdir&gt;</code><a class="headerlink" href="#cmdoption-sphinx-autogen-o" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory to place the output file. If it does not exist, it is created.
+Defaults to the value passed to the <code class="docutils literal notranslate"><span class="pre">:toctree:</span></code> option.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-sphinx-autogen-s">
+<span id="cmdoption-sphinx-autogen-suffix"></span><code class="sig-name descname">-s</code><code class="sig-prename descclassname"> &lt;suffix&gt;</code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--suffix</code><code class="sig-prename descclassname"> &lt;suffix&gt;</code><a class="headerlink" href="#cmdoption-sphinx-autogen-s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default suffix to use for generated files. Defaults to <code class="docutils literal notranslate"><span class="pre">rst</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-sphinx-autogen-t">
+<span id="cmdoption-sphinx-autogen-templates"></span><code class="sig-name descname">-t</code><code class="sig-prename descclassname"> &lt;templates&gt;</code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--templates</code><code class="sig-prename descclassname"> &lt;templates&gt;</code><a class="headerlink" href="#cmdoption-sphinx-autogen-t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom template directory. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt id="cmdoption-sphinx-autogen-i">
+<span id="cmdoption-sphinx-autogen-imported-members"></span><code class="sig-name descname">-i</code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--imported-members</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-sphinx-autogen-i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document imported members.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Given the following directory structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docs
+├── index.rst
+└── ...
+foobar
+├── foo
+│   └── __init__.py
+└── bar
+    ├── __init__.py
+    └── baz
+        └── __init__.py
+</pre></div>
+</div>
+<p>and assuming <code class="docutils literal notranslate"><span class="pre">docs/index.rst</span></code> contained the following:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="gh">Modules</span>
+<span class="gh">=======</span>
+
+<span class="p">..</span> <span class="ow">autosummary</span><span class="p">::</span>
+   <span class="nc">:toctree:</span> <span class="nf">modules</span>
+
+   foobar.foo
+   foobar.bar
+   foobar.bar.baz
+</pre></div>
+</div>
+<p>If you run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">PYTHONPATH</span><span class="o">=</span>. sphinx-autogen docs/index.rst
+</pre></div>
+</div>
+<p>then the following stub files will be created in <code class="docutils literal notranslate"><span class="pre">docs</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docs
+├── index.rst
+└── modules
+    ├── foobar.bar.rst
+    ├── foobar.bar.baz.rst
+    └── foobar.foo.rst
+</pre></div>
+</div>
+<p>and each of those files will contain a <code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autodoc</span></code> directive and some
+other information.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><em class="manpage">sphinx-build(1)</em>, <em class="manpage">sphinx-apidoc(1)</em></p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/sphinx/doc/man/sphinx-autogen.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

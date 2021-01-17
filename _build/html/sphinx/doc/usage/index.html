@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using Sphinx &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="using-sphinx">
+<h1>Using Sphinx<a class="headerlink" href="#using-sphinx" title="Permalink to this headline">¶</a></h1>
+<p>This guide serves to demonstrate how one can get started with Sphinx and covers
+everything from installing Sphinx and configuring your first Sphinx project to
+using some of the advanced features Sphinx provides out-of-the-box. If you are
+looking for guidance on extending Sphinx, refer to <span class="xref std std-doc">/development/index</span>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#setting-up-the-documentation-sources">Setting up the documentation sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#defining-document-structure">Defining document structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#adding-content">Adding content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-the-build">Running the build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#documenting-objects">Documenting objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#basic-configuration">Basic configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#autodoc">Autodoc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#intersphinx">Intersphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#more-topics-to-be-covered">More topics to be covered</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing Sphinx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#macos">macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#windows">Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#docker">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-source">Installation from source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="restructuredtext/index.html">reStructuredText</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="restructuredtext/basics.html">reStructuredText Primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="restructuredtext/roles.html">Roles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="restructuredtext/directives.html">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="restructuredtext/field-lists.html">Field Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="restructuredtext/domains.html">Domains</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="markdown.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#project-information">Project information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#general-configuration">General configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-internationalization">Options for internationalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-math">Options for Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-html-output">Options for HTML output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-single-html-output">Options for Single HTML output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-html-help-output">Options for HTML help output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-apple-help-output">Options for Apple Help output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-epub-output">Options for epub output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-latex-output">Options for LaTeX output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-text-output">Options for text output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-manual-page-output">Options for manual page output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-texinfo-output">Options for Texinfo output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-qthelp-output">Options for QtHelp output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-the-linkcheck-builder">Options for the linkcheck builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-the-xml-builder">Options for the XML builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#options-for-the-c-domain">Options for the C domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#cpp-config">Options for the C++ domain</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="builders/index.html">Builders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="builders/index.html#serialization-builder-details">Serialization builder details</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extensions/index.html">Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extensions/index.html#built-in-extensions">Built-in extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions/index.html#third-party-extensions">Third-party extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theming.html">HTML Theming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theming.html#builders">Builders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theming.html#themes">Themes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/intl.html">Internationalization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/intl.html#sphinx-internationalization-details">Sphinx internationalization details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/intl.html#translating-with-sphinx-intl">Translating with sphinx-intl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/intl.html#using-transifex-service-for-team-translation">Using Transifex service for team translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/intl.html#contributing-to-sphinx-reference-translation">Contributing to Sphinx reference translation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/setuptools.html">Setuptools integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/setuptools.html#using-setuptools-integration">Using setuptools integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/setuptools.html#options-for-setuptools-integration">Options for setuptools integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/websupport/index.html">Sphinx Web Support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/websupport/quickstart.html">Web Support Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/websupport/api.html">The WebSupport Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/websupport/searchadapters.html">Search Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/websupport/storagebackends.html">Storage Backends</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/sphinx/doc/usage/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

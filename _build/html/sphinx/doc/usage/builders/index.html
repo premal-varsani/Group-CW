@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Builders &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="builders">
+<span id="id1"></span><h1>Builders<a class="headerlink" href="#builders" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-sphinx.builders"></span><p>These are the built-in Sphinx builders.  More builders can be added by
+<span class="xref std std-doc">extensions</span>.</p>
+<p>The builder’s “name” must be given to the <strong>-b</strong> command-line option of
+<strong class="program">sphinx-build</strong> to select a builder.</p>
+<span class="target" id="module-sphinx.builders.html"></span><dl class="py class">
+<dt id="sphinx.builders.html.StandaloneHTMLBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.html.</code><code class="sig-name descname">StandaloneHTMLBuilder</code><a class="headerlink" href="#sphinx.builders.html.StandaloneHTMLBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the standard HTML builder.  Its output is a directory with HTML
+files, complete with style sheets and optionally the reST sources.  There are
+quite a few configuration values that customize the output of this builder,
+see the chapter <a class="reference internal" href="../configuration.html#html-options"><span class="std std-ref">Options for HTML output</span></a> for details.</p>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.dirhtml"></span><dl class="py class">
+<dt id="sphinx.builders.dirhtml.DirectoryHTMLBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.dirhtml.</code><code class="sig-name descname">DirectoryHTMLBuilder</code><a class="headerlink" href="#sphinx.builders.dirhtml.DirectoryHTMLBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a subclass of the standard HTML builder.  Its output is a directory
+with HTML files, where each file is called <code class="docutils literal notranslate"><span class="pre">index.html</span></code> and placed in a
+subdirectory named like its page name.  For example, the document
+<code class="docutils literal notranslate"><span class="pre">markup/rest.rst</span></code> will not result in an output file <code class="docutils literal notranslate"><span class="pre">markup/rest.html</span></code>,
+but <code class="docutils literal notranslate"><span class="pre">markup/rest/index.html</span></code>.  When generating links between pages, the
+<code class="docutils literal notranslate"><span class="pre">index.html</span></code> is omitted, so that the URL would look like <code class="docutils literal notranslate"><span class="pre">markup/rest/</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.6.</span></p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.singlehtml"></span><dl class="py class">
+<dt id="sphinx.builders.singlehtml.SingleFileHTMLBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.singlehtml.</code><code class="sig-name descname">SingleFileHTMLBuilder</code><a class="headerlink" href="#sphinx.builders.singlehtml.SingleFileHTMLBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is an HTML builder that combines the whole project in one output file.
+(Obviously this only works with smaller projects.)  The file is named like
+the master document.  No indices will be generated.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.0.</span></p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinxcontrib.htmlhelp"></span><dl class="py class">
+<dt id="sphinxcontrib.htmlhelp.HTMLHelpBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinxcontrib.htmlhelp.</code><code class="sig-name descname">HTMLHelpBuilder</code><a class="headerlink" href="#sphinxcontrib.htmlhelp.HTMLHelpBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces the same output as the standalone HTML builder, but
+also generates HTML Help support files that allow the Microsoft HTML Help
+Workshop to compile them into a CHM file.</p>
+</dd></dl>
+
+<span class="target" id="module-sphinxcontrib.qthelp"></span><dl class="py class">
+<dt id="sphinxcontrib.qthelp.QtHelpBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinxcontrib.qthelp.</code><code class="sig-name descname">QtHelpBuilder</code><a class="headerlink" href="#sphinxcontrib.qthelp.QtHelpBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces the same output as the standalone HTML builder, but
+also generates <a class="reference external" href="https://doc.qt.io/qt-4.8/qthelp-framework.html">Qt help</a> collection support files that allow the Qt
+collection generator to compile them.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 2.0: </span>Moved to sphinxcontrib.qthelp from sphinx.builders package.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinxcontrib.applehelp"></span><dl class="py class">
+<dt id="sphinxcontrib.applehelp.AppleHelpBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinxcontrib.applehelp.</code><code class="sig-name descname">AppleHelpBuilder</code><a class="headerlink" href="#sphinxcontrib.applehelp.AppleHelpBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces an Apple Help Book based on the same output as the
+standalone HTML builder.</p>
+<p>If the source directory contains any <code class="docutils literal notranslate"><span class="pre">.lproj</span></code> folders, the one
+corresponding to the selected language will have its contents merged with
+the generated output.  These folders will be ignored by all other
+documentation types.</p>
+<p>In order to generate a valid help book, this builder requires the command
+line tool <strong class="program">hiutil</strong>, which is only available on Mac OS X 10.6 and
+above.  You can disable the indexing step by setting
+<a href="#id2"><span class="problematic" id="id3">:confval:`applehelp_disable_external_tools`</span></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code>, in which case the
+output will not be valid until <strong class="program">hiutil</strong> has been run on all of the
+<code class="docutils literal notranslate"><span class="pre">.lproj</span></code> folders within the bundle.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 2.0: </span>Moved to sphinxcontrib.applehelp from sphinx.builders package.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinxcontrib.devhelp"></span><dl class="py class">
+<dt id="sphinxcontrib.devhelp.DevhelpBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinxcontrib.devhelp.</code><code class="sig-name descname">DevhelpBuilder</code><a class="headerlink" href="#sphinxcontrib.devhelp.DevhelpBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces the same output as the standalone HTML builder, but
+also generates <a class="reference external" href="https://wiki.gnome.org/Apps/Devhelp">GNOME Devhelp</a>
+support file that allows the GNOME Devhelp reader to view them.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 2.0: </span>Moved to sphinxcontrib.devhelp from sphinx.builders package.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.epub3"></span><dl class="py class">
+<dt id="sphinx.builders.epub3.Epub3Builder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.epub3.</code><code class="sig-name descname">Epub3Builder</code><a class="headerlink" href="#sphinx.builders.epub3.Epub3Builder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces the same output as the standalone HTML builder, but
+also generates an <em>epub</em> file for ebook readers.  See <a class="reference internal" href="../../faq.html#epub-faq"><span class="std std-ref">Epub info</span></a> for
+details about it.  For definition of the epub format, have a look at
+<a class="reference external" href="http://idpf.org/epub">http://idpf.org/epub</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/EPUB">https://en.wikipedia.org/wiki/EPUB</a>.
+The builder creates <em>EPUB 3</em> files.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.5: </span>Since Sphinx-1.5, the epub3 builder is used for the default builder of
+epub.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.latex"></span><dl class="py class">
+<dt id="sphinx.builders.latex.LaTeXBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.latex.</code><code class="sig-name descname">LaTeXBuilder</code><a class="headerlink" href="#sphinx.builders.latex.LaTeXBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces a bunch of LaTeX files in the output directory.  You
+have to specify which documents are to be included in which LaTeX files via
+the <a href="#id4"><span class="problematic" id="id5">:confval:`latex_documents`</span></a> configuration value.  There are a few
+configuration values that customize the output of this builder, see the
+chapter <a class="reference internal" href="../configuration.html#latex-options"><span class="std std-ref">Options for LaTeX output</span></a> for details.</p>
+<p>The produced LaTeX file uses several LaTeX packages that may not be present
+in a “minimal” TeX distribution installation.</p>
+<p>On Ubuntu xenial, the following packages need to be installed for
+successful PDF builds:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">texlive-latex-recommended</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">texlive-fonts-recommended</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">texlive-latex-extra</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">latexmk</span></code> (this is a Sphinx requirement on GNU/Linux and MacOS X
+for functioning of <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">latexpdf</span></code>)</p></li>
+</ul>
+<p>Additional packages are needed in some circumstances (see the discussion of
+the <code class="docutils literal notranslate"><span class="pre">'fontpkg'</span></code> key of <a href="#id6"><span class="problematic" id="id7">:confval:`latex_elements`</span></a> for more information):</p>
+<ul class="simple">
+<li><p>to support occasional Cyrillic letters or words, and a fortiori if
+<a href="#id8"><span class="problematic" id="id9">:confval:`language`</span></a> is set to a Cyrillic language, the package
+<code class="docutils literal notranslate"><span class="pre">texlive-lang-cyrillic</span></code> is required, and, with unmodified <code class="docutils literal notranslate"><span class="pre">'fontpkg'</span></code>,
+also <code class="docutils literal notranslate"><span class="pre">cm-super</span></code> or <code class="docutils literal notranslate"><span class="pre">cm-super-minimal</span></code>,</p></li>
+<li><p>to support occasional Greek letters or words (in text, not in
+<a class="reference internal" href="../restructuredtext/directives.html#directive-math" title="math directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">math</span></code></a> directive contents), <code class="docutils literal notranslate"><span class="pre">texlive-lang-greek</span></code> is required,
+and, with unmodified <code class="docutils literal notranslate"><span class="pre">'fontpkg'</span></code>, also <code class="docutils literal notranslate"><span class="pre">cm-super</span></code> or
+<code class="docutils literal notranslate"><span class="pre">cm-super-minimal</span></code>,</p></li>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">'xelatex'</span></code> or <code class="docutils literal notranslate"><span class="pre">'lualatex'</span></code> (see <a href="#id10"><span class="problematic" id="id11">:confval:`latex_engine`</span></a>),
+<code class="docutils literal notranslate"><span class="pre">texlive-xetex</span></code> resp. <code class="docutils literal notranslate"><span class="pre">texlive-luatex</span></code>, and, if leaving unchanged
+<code class="docutils literal notranslate"><span class="pre">'fontpkg'</span></code>, <code class="docutils literal notranslate"><span class="pre">fonts-freefont-otf</span></code>.</p></li>
+</ul>
+<p>The testing of Sphinx LaTeX is done on Ubuntu xenial whose TeX distribution
+is based on a TeXLive 2015 snapshot dated March 2016.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.6: </span>Formerly, testing had been done on Ubuntu precise (TeXLive 2009).</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 2.0: </span>Formerly, testing had been done on Ubuntu trusty (TeXLive 2013).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since 1.6, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">latexpdf</span></code> uses <code class="docutils literal notranslate"><span class="pre">latexmk</span></code> (not on Windows).  This
+makes sure the needed number of runs is automatically executed to get
+the cross-references, bookmarks, indices, and tables of contents right.</p>
+<p>One can pass to <code class="docutils literal notranslate"><span class="pre">latexmk</span></code> options via the <code class="docutils literal notranslate"><span class="pre">LATEXMKOPTS</span></code>
+Makefile variable. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make latexpdf LATEXMKOPTS=&quot;-silent&quot;</span>
+</pre></div>
+</div>
+<p>reduces console output to a minimum.</p>
+<p>Also, if <code class="docutils literal notranslate"><span class="pre">latexmk</span></code> is at version 4.52b or higher (January 2017)
+<code class="docutils literal notranslate"><span class="pre">LATEXMKOPTS=&quot;-xelatex&quot;</span></code> speeds up PDF builds via XeLateX in case
+of numerous graphics inclusions.</p>
+<p>To pass options directly to the <code class="docutils literal notranslate"><span class="pre">(pdf|xe|lua)latex</span></code> binary, use
+variable <code class="docutils literal notranslate"><span class="pre">LATEXOPTS</span></code>, for example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">make latexpdf LATEXOPTS=&quot;--halt-on-error&quot;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<p>Note that a direct PDF builder is being provided by <a class="reference external" href="https://github.com/brechtm/rinohtype">rinohtype</a>. The builder’s
+name is <code class="docutils literal notranslate"><span class="pre">rinoh</span></code>. Refer to the <a class="reference external" href="https://www.mos6581.org/rinohtype/quickstart.html#sphinx-builder">rinohtype manual</a> for details.</p>
+<span class="target" id="module-sphinx.builders.text"></span><dl class="py class">
+<dt id="sphinx.builders.text.TextBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.text.</code><code class="sig-name descname">TextBuilder</code><a class="headerlink" href="#sphinx.builders.text.TextBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces a text file for each reST file – this is almost the
+same as the reST source, but with much of the markup stripped for better
+readability.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.</span></p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.manpage"></span><dl class="py class">
+<dt id="sphinx.builders.manpage.ManualPageBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.manpage.</code><code class="sig-name descname">ManualPageBuilder</code><a class="headerlink" href="#sphinx.builders.manpage.ManualPageBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces manual pages in the groff format.  You have to specify
+which documents are to be included in which manual pages via the
+<a href="#id12"><span class="problematic" id="id13">:confval:`man_pages`</span></a> configuration value.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.0.</span></p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.texinfo"></span><dl class="py class">
+<dt id="sphinx.builders.texinfo.TexinfoBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.texinfo.</code><code class="sig-name descname">TexinfoBuilder</code><a class="headerlink" href="#sphinx.builders.texinfo.TexinfoBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces Texinfo files that can be processed into Info files by
+the <strong class="program">makeinfo</strong> program.  You have to specify which documents are to
+be included in which Texinfo files via the <a href="#id14"><span class="problematic" id="id15">:confval:`texinfo_documents`</span></a>
+configuration value.</p>
+<p>The Info format is the basis of the on-line help system used by GNU Emacs and
+the terminal-based program <strong class="program">info</strong>.  See <a class="reference internal" href="../../faq.html#texinfo-faq"><span class="std std-ref">Texinfo info</span></a> for more
+details.  The Texinfo format is the official documentation system used by the
+GNU project.  More information on Texinfo can be found at
+<a class="reference external" href="https://www.gnu.org/software/texinfo/">https://www.gnu.org/software/texinfo/</a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinxcontrib.serializinghtml.SerializingHTMLBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinxcontrib.serializinghtml.</code><code class="sig-name descname">SerializingHTMLBuilder</code><a class="headerlink" href="#sphinxcontrib.serializinghtml.SerializingHTMLBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder uses a module that implements the Python serialization API
+(<cite>pickle</cite>, <cite>simplejson</cite>, <cite>phpserialize</cite>, and others) to dump the generated
+HTML documentation.  The pickle builder is a subclass of it.</p>
+<p>A concrete subclass of this builder serializing to the <a class="reference external" href="https://pypi.org/project/phpserialize/">PHP serialization</a>
+format could look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">phpserialize</span>
+
+<span class="k">class</span> <span class="nc">PHPSerializedBuilder</span><span class="p">(</span><span class="n">SerializingHTMLBuilder</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;phpserialized&#39;</span>
+    <span class="n">implementation</span> <span class="o">=</span> <span class="n">phpserialize</span>
+    <span class="n">out_suffix</span> <span class="o">=</span> <span class="s1">&#39;.file.phpdump&#39;</span>
+    <span class="n">globalcontext_filename</span> <span class="o">=</span> <span class="s1">&#39;globalcontext.phpdump&#39;</span>
+    <span class="n">searchindex_filename</span> <span class="o">=</span> <span class="s1">&#39;searchindex.phpdump&#39;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="sphinxcontrib.serializinghtml.SerializingHTMLBuilder.implementation">
+<code class="sig-name descname">implementation</code><a class="headerlink" href="#sphinxcontrib.serializinghtml.SerializingHTMLBuilder.implementation" title="Permalink to this definition">¶</a></dt>
+<dd><p>A module that implements <cite>dump()</cite>, <cite>load()</cite>, <cite>dumps()</cite> and <cite>loads()</cite>
+functions that conform to the functions with the same names from the
+pickle module.  Known modules implementing this interface are
+<cite>simplejson</cite>, <cite>phpserialize</cite>, <cite>plistlib</cite>, and others.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sphinxcontrib.serializinghtml.SerializingHTMLBuilder.out_suffix">
+<code class="sig-name descname">out_suffix</code><a class="headerlink" href="#sphinxcontrib.serializinghtml.SerializingHTMLBuilder.out_suffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>The suffix for all regular files.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sphinxcontrib.serializinghtml.SerializingHTMLBuilder.globalcontext_filename">
+<code class="sig-name descname">globalcontext_filename</code><a class="headerlink" href="#sphinxcontrib.serializinghtml.SerializingHTMLBuilder.globalcontext_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>The filename for the file that contains the “global context”.  This
+is a dict with some general configuration values such as the name
+of the project.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sphinxcontrib.serializinghtml.SerializingHTMLBuilder.searchindex_filename">
+<code class="sig-name descname">searchindex_filename</code><a class="headerlink" href="#sphinxcontrib.serializinghtml.SerializingHTMLBuilder.searchindex_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>The filename for the search index Sphinx generates.</p>
+</dd></dl>
+
+<p>See <a class="reference internal" href="#serialization-details"><span class="std std-ref">Serialization builder details</span></a> for details about the output format.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.5.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinxcontrib.serializinghtml.PickleHTMLBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinxcontrib.serializinghtml.</code><code class="sig-name descname">PickleHTMLBuilder</code><a class="headerlink" href="#sphinxcontrib.serializinghtml.PickleHTMLBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces a directory with pickle files containing mostly HTML
+fragments and TOC information, for use of a web application (or custom
+postprocessing tool) that doesn’t use the standard HTML templates.</p>
+<p>See <a class="reference internal" href="#serialization-details"><span class="std std-ref">Serialization builder details</span></a> for details about the output format.</p>
+<p>The file suffix is <code class="docutils literal notranslate"><span class="pre">.fpickle</span></code>.  The global context is called
+<code class="docutils literal notranslate"><span class="pre">globalcontext.pickle</span></code>, the search index <code class="docutils literal notranslate"><span class="pre">searchindex.pickle</span></code>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinxcontrib.serializinghtml.JSONHTMLBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinxcontrib.serializinghtml.</code><code class="sig-name descname">JSONHTMLBuilder</code><a class="headerlink" href="#sphinxcontrib.serializinghtml.JSONHTMLBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces a directory with JSON files containing mostly HTML
+fragments and TOC information, for use of a web application (or custom
+postprocessing tool) that doesn’t use the standard HTML templates.</p>
+<p>See <a class="reference internal" href="#serialization-details"><span class="std std-ref">Serialization builder details</span></a> for details about the output format.</p>
+<p>The file suffix is <code class="docutils literal notranslate"><span class="pre">.fjson</span></code>.  The global context is called
+<code class="docutils literal notranslate"><span class="pre">globalcontext.json</span></code>, the search index <code class="docutils literal notranslate"><span class="pre">searchindex.json</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.5.</span></p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.gettext"></span><dl class="py class">
+<dt id="sphinx.builders.gettext.MessageCatalogBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.gettext.</code><code class="sig-name descname">MessageCatalogBuilder</code><a class="headerlink" href="#sphinx.builders.gettext.MessageCatalogBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces gettext-style message catalogs.  Each top-level file or
+subdirectory grows a single <code class="docutils literal notranslate"><span class="pre">.pot</span></code> catalog template.</p>
+<p>See the documentation on <a class="reference internal" href="../advanced/intl.html#intl"><span class="std std-ref">Internationalization</span></a> for further reference.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.1.</span></p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.changes"></span><dl class="py class">
+<dt id="sphinx.builders.changes.ChangesBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.changes.</code><code class="sig-name descname">ChangesBuilder</code><a class="headerlink" href="#sphinx.builders.changes.ChangesBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces an HTML overview of all <a class="reference internal" href="../restructuredtext/directives.html#directive-versionadded" title="versionadded directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">versionadded</span></code></a>,
+<a class="reference internal" href="../restructuredtext/directives.html#directive-versionchanged" title="versionchanged directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">versionchanged</span></code></a> and <a class="reference internal" href="../restructuredtext/directives.html#directive-deprecated" title="deprecated directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">deprecated</span></code></a> directives for the
+current <a href="#id16"><span class="problematic" id="id17">:confval:`version`</span></a>.  This is useful to generate a ChangeLog file, for
+example.</p>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.dummy"></span><dl class="py class">
+<dt id="sphinx.builders.dummy.DummyBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.dummy.</code><code class="sig-name descname">DummyBuilder</code><a class="headerlink" href="#sphinx.builders.dummy.DummyBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces no output.  The input is only parsed and checked for
+consistency.  This is useful for linting purposes.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.</span></p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.linkcheck"></span><dl class="py class">
+<dt id="sphinx.builders.linkcheck.CheckExternalLinksBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.linkcheck.</code><code class="sig-name descname">CheckExternalLinksBuilder</code><a class="headerlink" href="#sphinx.builders.linkcheck.CheckExternalLinksBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder scans all documents for external links, tries to open them with
+<code class="docutils literal notranslate"><span class="pre">requests</span></code>, and writes an overview which ones are broken and redirected to
+standard output and to <code class="file docutils literal notranslate"><span class="pre">output.txt</span></code> in the output directory.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.5: </span>Since Sphinx-1.5, the linkcheck builder comes to use requests module.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.4: </span>The linkcheck builder retries links when servers apply rate limits.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-sphinx.builders.xml"></span><dl class="py class">
+<dt id="sphinx.builders.xml.XMLBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.xml.</code><code class="sig-name descname">XMLBuilder</code><a class="headerlink" href="#sphinx.builders.xml.XMLBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder produces Docutils-native XML files.  The output can be
+transformed with standard XML tools such as XSLT processors into arbitrary
+final forms.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.2.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt id="sphinx.builders.xml.PseudoXMLBuilder">
+<em class="property">class </em><code class="sig-prename descclassname">sphinx.builders.xml.</code><code class="sig-name descname">PseudoXMLBuilder</code><a class="headerlink" href="#sphinx.builders.xml.PseudoXMLBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This builder is used for debugging the Sphinx/Docutils “Reader to Transform
+to Writer” pipeline. It produces compact pretty-printed “pseudo-XML”, files
+where nesting is indicated by indentation (no end-tags). External
+attributes for all elements are output, and internal attributes for any
+leftover “pending” elements are also given.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.2.</span></p>
+</div>
+</dd></dl>
+
+<p>Built-in Sphinx extensions that offer more builders are:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../extensions/doctest.html#module-sphinx.ext.doctest" title="sphinx.ext.doctest: Test snippets in the documentation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">doctest</span></code></a></p></li>
+<li><p><a class="reference internal" href="../extensions/coverage.html#module-sphinx.ext.coverage" title="sphinx.ext.coverage: Check Python modules and C API for coverage in the documentation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">coverage</span></code></a></p></li>
+</ul>
+<div class="section" id="serialization-builder-details">
+<span id="serialization-details"></span><h2>Serialization builder details<a class="headerlink" href="#serialization-builder-details" title="Permalink to this headline">¶</a></h2>
+<p>All serialization builders outputs one file per source file and a few special
+files.  They also copy the reST source files in the directory <code class="docutils literal notranslate"><span class="pre">_sources</span></code>
+under the output directory.</p>
+<p>The <a class="reference internal" href="#sphinxcontrib.serializinghtml.PickleHTMLBuilder" title="sphinxcontrib.serializinghtml.PickleHTMLBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">PickleHTMLBuilder</span></code></a> is a builtin subclass that implements the pickle
+serialization interface.</p>
+<p>The files per source file have the extensions of
+<a class="reference internal" href="#sphinxcontrib.serializinghtml.SerializingHTMLBuilder.out_suffix" title="sphinxcontrib.serializinghtml.SerializingHTMLBuilder.out_suffix"><code class="xref py py-attr docutils literal notranslate"><span class="pre">out_suffix</span></code></a>, and are arranged in directories
+just as the source files are.  They unserialize to a dictionary (or dictionary
+like structure) with these keys:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">body</span></code></dt><dd><p>The HTML “body” (that is, the HTML rendering of the source file), as rendered
+by the HTML translator.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">title</span></code></dt><dd><p>The title of the document, as HTML (may contain markup).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">toc</span></code></dt><dd><p>The table of contents for the file, rendered as an HTML <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">display_toc</span></code></dt><dd><p>A boolean that is <code class="docutils literal notranslate"><span class="pre">True</span></code> if the <code class="docutils literal notranslate"><span class="pre">toc</span></code> contains more than one entry.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">current_page_name</span></code></dt><dd><p>The document name of the current file.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">parents</span></code>, <code class="docutils literal notranslate"><span class="pre">prev</span></code> and <code class="docutils literal notranslate"><span class="pre">next</span></code></dt><dd><p>Information about related chapters in the TOC tree.  Each relation is a
+dictionary with the keys <code class="docutils literal notranslate"><span class="pre">link</span></code> (HREF for the relation) and <code class="docutils literal notranslate"><span class="pre">title</span></code>
+(title of the related document, as HTML).  <code class="docutils literal notranslate"><span class="pre">parents</span></code> is a list of
+relations, while <code class="docutils literal notranslate"><span class="pre">prev</span></code> and <code class="docutils literal notranslate"><span class="pre">next</span></code> are a single relation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sourcename</span></code></dt><dd><p>The name of the source file under <code class="docutils literal notranslate"><span class="pre">_sources</span></code>.</p>
+</dd>
+</dl>
+<p>The special files are located in the root output directory.  They are:</p>
+<dl>
+<dt><a class="reference internal" href="#sphinxcontrib.serializinghtml.SerializingHTMLBuilder.globalcontext_filename" title="sphinxcontrib.serializinghtml.SerializingHTMLBuilder.globalcontext_filename"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SerializingHTMLBuilder.globalcontext_filename</span></code></a></dt><dd><p>A pickled dict with these keys:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">project</span></code>, <code class="docutils literal notranslate"><span class="pre">copyright</span></code>, <code class="docutils literal notranslate"><span class="pre">release</span></code>, <code class="docutils literal notranslate"><span class="pre">version</span></code></dt><dd><p>The same values as given in the configuration file.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">style</span></code></dt><dd><p><a href="#id18"><span class="problematic" id="id19">:confval:`html_style`</span></a>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">last_updated</span></code></dt><dd><p>Date of last build.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">builder</span></code></dt><dd><p>Name of the used builder, in the case of pickles this is always
+<code class="docutils literal notranslate"><span class="pre">'pickle'</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">titles</span></code></dt><dd><p>A dictionary of all documents’ titles, as HTML strings.</p>
+</dd>
+</dl>
+</dd>
+<dt><a class="reference internal" href="#sphinxcontrib.serializinghtml.SerializingHTMLBuilder.searchindex_filename" title="sphinxcontrib.serializinghtml.SerializingHTMLBuilder.searchindex_filename"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SerializingHTMLBuilder.searchindex_filename</span></code></a></dt><dd><p>An index that can be used for searching the documentation.  It is a pickled
+list with these entries:</p>
+<ul class="simple">
+<li><p>A list of indexed docnames.</p></li>
+<li><p>A list of document titles, as HTML strings, in the same order as the first
+list.</p></li>
+<li><p>A dict mapping word roots (processed by an English-language stemmer) to a
+list of integers, which are indices into the first list.</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">environment.pickle</span></code></dt><dd><p>The build environment.  This is always a pickle file, independent of the
+builder and a copy of the environment that was used when the builder was
+started.</p>
+<p>Unlike the other pickle files this pickle file requires that the <code class="docutils literal notranslate"><span class="pre">sphinx</span></code>
+package is available on unpickling.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../_sources/sphinx/doc/usage/builders/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

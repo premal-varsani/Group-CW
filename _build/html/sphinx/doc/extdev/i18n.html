@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>i18n API &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="i18n-api">
+<span id="id1"></span><h1>i18n API<a class="headerlink" href="#i18n-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="extension-internationalization-i18n-and-localization-l10n-using-i18n-api">
+<span id="ext-i18n"></span><h2>Extension internationalization (<cite>i18n</cite>) and localization (<cite>l10n</cite>) using i18n API<a class="headerlink" href="#extension-internationalization-i18n-and-localization-l10n-using-i18n-api" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.8.</span></p>
+</div>
+<p>An extension may naturally come with message translations.  This is briefly
+summarized in <code class="xref py py-func docutils literal notranslate"><span class="pre">sphinx.locale.get_translation()</span></code> help.</p>
+<p>In practice, you have to:</p>
+<ol class="arabic">
+<li><p>Choose a name for your message catalog, which must be unique.  Usually
+the name of your extension is used for the name of message catalog.</p></li>
+<li><p>Mark in your extension sources all messages as translatable, via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sphinx.locale.get_translation()</span></code> function, usually renamed <code class="docutils literal notranslate"><span class="pre">_()</span></code>,
+e.g.:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">src/__init__.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sphinx.locale</span> <span class="kn">import</span> <span class="n">get_translation</span>
+
+<span class="n">MESSAGE_CATALOG_NAME</span> <span class="o">=</span> <span class="s1">&#39;myextension&#39;</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">get_translation</span><span class="p">(</span><span class="n">MESSAGE_CATALOG_NAME</span><span class="p">)</span>
+
+<span class="n">translated_text</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Hello Sphinx!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Set up your extension to be aware of its dedicated translations:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">src/__init__.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="n">package_dir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+    <span class="n">locale_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">package_dir</span><span class="p">,</span> <span class="s1">&#39;locales&#39;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_message_catalog</span><span class="p">(</span><span class="n">MESSAGE_CATALOG_NAME</span><span class="p">,</span> <span class="n">locale_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Generate message catalog template <code class="docutils literal notranslate"><span class="pre">*.pot</span></code> file, usually in <code class="docutils literal notranslate"><span class="pre">locale/</span></code>
+source directory, for example via <a class="reference external" href="http://babel.pocoo.org/">Babel</a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pybabel extract --output<span class="o">=</span>src/locale/myextension.pot src/
+</pre></div>
+</div>
+</li>
+<li><p>Create message catalogs (<code class="docutils literal notranslate"><span class="pre">*.po</span></code>) for each language which your extension
+will provide localization, for example via <a class="reference external" href="http://babel.pocoo.org/">Babel</a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pybabel init --input-file<span class="o">=</span>src/locale/myextension.pot --domain<span class="o">=</span>myextension --output-dir<span class="o">=</span>src/locale --locale<span class="o">=</span>fr_FR
+</pre></div>
+</div>
+</li>
+<li><p>Translate message catalogs for each language manually</p></li>
+<li><p>Compile message catalogs into <code class="docutils literal notranslate"><span class="pre">*.mo</span></code> files, for example via <a class="reference external" href="http://babel.pocoo.org/">Babel</a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pybabel compile --directory<span class="o">=</span>src/locale --domain<span class="o">=</span>myextension
+</pre></div>
+</div>
+</li>
+<li><p>Ensure that message catalog files are distributed when your package will
+be installed, by adding equivalent line in your extension <code class="docutils literal notranslate"><span class="pre">MANIFEST.in</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">MANIFEST.in</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">recursive-include src *.pot *.po *.mo</span>
+</pre></div>
+</div>
+</div>
+</li>
+</ol>
+<p>When the messages on your extension has been changed, you need to also update
+message catalog template and message catalogs, for example via <a class="reference external" href="http://babel.pocoo.org/">Babel</a>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pybabel extract --output<span class="o">=</span>src/locale/myextension.pot src/
+<span class="gp">$</span> pybabel update --input-file<span class="o">=</span>src/locale/myextension.pot --domain<span class="o">=</span>myextension --output-dir<span class="o">=</span>src/locale
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/sphinx/doc/extdev/i18n.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

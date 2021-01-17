@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glossary &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="glossary">
+<span id="id1"></span><h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<dl class="glossary">
+<dt id="term-builder">builder</dt><dd><p>A class (inheriting from <a class="reference internal" href="extdev/builderapi.html#sphinx.builders.Builder" title="sphinx.builders.Builder"><code class="xref py py-class docutils literal notranslate"><span class="pre">Builder</span></code></a>) that takes
+parsed documents and performs an action on them.  Normally, builders
+translate the documents to an output format, but it is also possible to
+use builders that e.g. check for broken links in the documentation, or
+build coverage information.</p>
+<p>See <span class="xref std std-doc">/usage/builders/index</span> for an overview over Sphinx’s built-in
+builders.</p>
+</dd>
+<dt id="term-configuration-directory">configuration directory</dt><dd><p>The directory containing <code class="file docutils literal notranslate"><span class="pre">conf.py</span></code>.  By default, this is the same as
+the <a class="reference internal" href="#term-source-directory"><span class="xref std std-term">source directory</span></a>, but can be set differently with the <strong>-c</strong>
+command-line option.</p>
+</dd>
+<dt id="term-directive">directive</dt><dd><p>A reStructuredText markup element that allows marking a block of content
+with special meaning.  Directives are supplied not only by docutils, but
+Sphinx and custom extensions can add their own.  The basic directive
+syntax looks like this:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">directivename</span><span class="p">::</span> argument ...
+   <span class="nc">:option:</span> <span class="nf">value</span>
+
+   Content of the directive.
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="usage/restructuredtext/basics.html#rst-directives"><span class="std std-ref">Directives</span></a> for more information.</p>
+</dd>
+<dt id="term-document-name">document name</dt><dd><p>Since reST source files can have different extensions (some people like
+<code class="docutils literal notranslate"><span class="pre">.txt</span></code>, some like <code class="docutils literal notranslate"><span class="pre">.rst</span></code> – the extension can be configured with
+<a href="#id2"><span class="problematic" id="id3">:confval:`source_suffix`</span></a>) and different OSes have different path
+separators, Sphinx abstracts them: <em class="dfn">document names</em> are always
+relative to the <a class="reference internal" href="#term-source-directory"><span class="xref std std-term">source directory</span></a>, the extension is stripped, and
+path separators are converted to slashes.  All values, parameters and such
+referring to “documents” expect such document names.</p>
+<p>Examples for document names are <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">library/zipfile</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">reference/datamodel/types</span></code>.  Note that there is no leading or trailing
+slash.</p>
+</dd>
+<dt id="term-domain">domain</dt><dd><p>A domain is a collection of markup (reStructuredText <a class="reference internal" href="#term-directive"><span class="xref std std-term">directive</span></a>s
+and <a class="reference internal" href="#term-role"><span class="xref std std-term">role</span></a>s) to describe and link to <a class="reference internal" href="#term-object"><span class="xref std std-term">object</span></a>s belonging
+together, e.g. elements of a programming language.  Directive and role
+names in a domain have names like <code class="docutils literal notranslate"><span class="pre">domain:name</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">py:function</span></code>.</p>
+<p>Having domains means that there are no naming problems when one set of
+documentation wants to refer to e.g. C++ and Python classes.  It also
+means that extensions that support the documentation of whole new
+languages are much easier to write.</p>
+<p>For more information, refer to <span class="xref std std-doc">/usage/restructuredtext/domains</span>.</p>
+</dd>
+<dt id="term-environment">environment</dt><dd><p>A structure where information about all documents under the root is saved,
+and used for cross-referencing.  The environment is pickled after the
+parsing stage, so that successive runs only need to read and parse new and
+changed documents.</p>
+</dd>
+<dt id="term-extension">extension</dt><dd><p>A custom <a class="reference internal" href="#term-role"><span class="xref std std-term">role</span></a>, <a class="reference internal" href="#term-directive"><span class="xref std std-term">directive</span></a> or other aspect of Sphinx that
+allows users to modify any aspect of the build process within Sphinx.</p>
+<p>For more information, refer to <span class="xref std std-doc">/usage/extensions/index</span>.</p>
+</dd>
+<dt id="term-master-document">master document</dt><dd><p>The document that contains the root <a class="reference internal" href="usage/restructuredtext/directives.html#directive-toctree" title="toctree directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">toctree</span></code></a> directive.</p>
+</dd>
+<dt id="term-object">object</dt><dd><p>The basic building block of Sphinx documentation.  Every “object
+directive” (e.g. <code class="xref rst rst-dir docutils literal notranslate"><span class="pre">function</span></code> or <a class="reference internal" href="usage/restructuredtext/domains.html#directive-object" title="object directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">object</span></code></a>) creates such a
+block; and most objects can be cross-referenced to.</p>
+</dd>
+<dt id="term-RemoveInSphinxXXXWarning">RemoveInSphinxXXXWarning</dt><dd><p>The feature which is warned will be removed in Sphinx-XXX version.
+It usually caused from Sphinx extensions which is using deprecated.
+See also <a class="reference internal" href="man/sphinx-build.html#when-deprecation-warnings-are-displayed"><span class="std std-ref">Deprecation Warnings</span></a>.</p>
+</dd>
+<dt id="term-role">role</dt><dd><p>A reStructuredText markup element that allows marking a piece of text.
+Like directives, roles are extensible.  The basic syntax looks like this:
+<code class="docutils literal notranslate"><span class="pre">:rolename:`content`</span></code>.  See <a class="reference internal" href="usage/restructuredtext/basics.html#rst-inline-markup"><span class="std std-ref">Inline markup</span></a> for details.</p>
+</dd>
+<dt id="term-source-directory">source directory</dt><dd><p>The directory which, including its subdirectories, contains all source
+files for one Sphinx project.</p>
+</dd>
+<dt id="term-reStructuredText">reStructuredText</dt><dd><p>An easy-to-read, what-you-see-is-what-you-get plaintext markup syntax and
+parser system.</p>
+</dd>
+</dl>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/sphinx/doc/glossary.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

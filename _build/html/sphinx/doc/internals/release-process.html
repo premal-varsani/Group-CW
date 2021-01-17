@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sphinx’s release process &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="sphinx-s-release-process">
+<h1>Sphinx’s release process<a class="headerlink" href="#sphinx-s-release-process" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="branch-model">
+<h2>Branch Model<a class="headerlink" href="#branch-model" title="Permalink to this headline">¶</a></h2>
+<p>Sphinx project uses following branches for developing that conforms to Semantic
+Versioning 2.0.0 (refs: <a class="reference external" href="https://semver.org/">https://semver.org/</a> ).</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">master</span></code></dt><dd><p>Development for MAJOR version.
+All changes including incompatible behaviors and public API updates are
+allowed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">A.x</span></code> (ex. <code class="docutils literal notranslate"><span class="pre">2.x</span></code>)</dt><dd><p>Where <code class="docutils literal notranslate"><span class="pre">A.x</span></code> is the <code class="docutils literal notranslate"><span class="pre">MAJOR.MINOR</span></code> release.  Used to maintain current
+MINOR release. All changes are allowed if the change preserves
+backwards-compatibility of API and features.</p>
+<p>Only the most recent <code class="docutils literal notranslate"><span class="pre">MAJOR.MINOR</span></code> branch is currently retained. When a
+new MAJOR version is released, the old <code class="docutils literal notranslate"><span class="pre">MAJOR.MINOR</span></code> branch will be
+deleted and replaced by an equivalent tag.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">A.B.x</span></code> (ex. <code class="docutils literal notranslate"><span class="pre">2.4.x</span></code>)</dt><dd><p>Where <code class="docutils literal notranslate"><span class="pre">A.B.x</span></code> is the <code class="docutils literal notranslate"><span class="pre">MAJOR.MINOR.PATCH</span></code> release.  Only
+backwards-compatible bug fixes are allowed. In Sphinx project, PATCH
+version is used for urgent bug fix.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MAJOR.MINOR.PATCH</span></code> branch will be branched from the <code class="docutils literal notranslate"><span class="pre">v</span></code> prefixed
+release tag (ex. make 2.3.1 that branched from v2.3.0) when a urgent
+release is needed. When new PATCH version is released, the branch will be
+deleted and replaced by an equivalent tag (ex. v2.3.1).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="deprecating-a-feature">
+<h2>Deprecating a feature<a class="headerlink" href="#deprecating-a-feature" title="Permalink to this headline">¶</a></h2>
+<p>There are a couple reasons that code in Sphinx might be deprecated:</p>
+<ul class="simple">
+<li><p>If a feature has been improved or modified in a backwards-incompatible way,
+the old feature or behavior will be deprecated.</p></li>
+<li><p>Sometimes Sphinx will include a backport of a Python library that’s not
+included in a version of Python that Sphinx currently supports. When Sphinx
+no longer needs to support the older version of Python that doesn’t include
+the library, the library will be deprecated in Sphinx.</p></li>
+</ul>
+<p>As the <a class="reference internal" href="#deprecation-policy"><span class="std std-ref">Deprecation policy</span></a> describes, the first release of Sphinx that
+deprecates a feature (<code class="docutils literal notranslate"><span class="pre">A.B</span></code>) should raise a <code class="docutils literal notranslate"><span class="pre">RemovedInSphinxXXWarning</span></code>
+(where <code class="docutils literal notranslate"><span class="pre">XX</span></code> is the Sphinx version where the feature will be removed) when the
+deprecated feature is invoked. Assuming we have good test coverage, these
+warnings are converted to errors when running the test suite with warnings
+enabled:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">Wall</span>
+</pre></div>
+</div>
+<p>Thus, when adding a <code class="docutils literal notranslate"><span class="pre">RemovedInSphinxXXWarning</span></code> you need to eliminate or
+silence any warnings generated when running the tests.</p>
+</div>
+<div class="section" id="deprecation-policy">
+<span id="id1"></span><h2>Deprecation policy<a class="headerlink" href="#deprecation-policy" title="Permalink to this headline">¶</a></h2>
+<p>MAJOR and MINOR releases may deprecate certain features from previous
+releases. If a feature is deprecated in a release A.x, it will continue to
+work in all A.x.x versions (for all versions of x). It will continue to work
+in all B.x.x versions but raise deprecation warnings. Deprecated features
+will be removed at the C.0.0. It means the deprecated feature will work during
+2 MAJOR releases at least.</p>
+<p>So, for example, if we decided to start the deprecation of a function in
+Sphinx 2.x:</p>
+<ul class="simple">
+<li><p>Sphinx 2.x will contain a backwards-compatible replica of the function
+which will raise a <code class="docutils literal notranslate"><span class="pre">RemovedInSphinx40Warning</span></code>.
+This is a subclass of <code class="xref py py-exc docutils literal notranslate"><span class="pre">python:PendingDeprecationWarning</span></code>, i.e. it
+will not get displayed by default.</p></li>
+<li><p>Sphinx 3.x will still contain the backwards-compatible replica, but
+<code class="docutils literal notranslate"><span class="pre">RemovedInSphinx40Warning</span></code> will be a subclass of
+<code class="xref py py-exc docutils literal notranslate"><span class="pre">python:DeprecationWarning</span></code> then, and gets displayed by default.</p></li>
+<li><p>Sphinx 4.0 will remove the feature outright.</p></li>
+</ul>
+<div class="section" id="deprecation-warnings">
+<h3>Deprecation warnings<a class="headerlink" href="#deprecation-warnings" title="Permalink to this headline">¶</a></h3>
+<p>Sphinx will enable its <code class="docutils literal notranslate"><span class="pre">RemovedInNextVersionWarning</span></code> warnings by default, if
+<span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">python:PYTHONWARNINGS</span></code> is not set.  Therefore you can disable them
+using:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PYTHONWARNINGS=</span> <span class="pre">make</span> <span class="pre">html</span></code> (Linux/Mac)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PYTHONWARNINGS=</span></code> and do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> (Linux/Mac)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">PYTHONWARNINGS=</span></code> and do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> (Windows)</p></li>
+</ul>
+<p>But you can also explicitly enable the pending ones using e.g.
+<code class="docutils literal notranslate"><span class="pre">PYTHONWARNINGS=default</span></code> (see the <span class="xref std std-ref">Python docs on configuring warnings</span>) for more details.</p>
+</div>
+</div>
+<div class="section" id="release-procedures">
+<h2>Release procedures<a class="headerlink" href="#release-procedures" title="Permalink to this headline">¶</a></h2>
+<p>The release procedures are listed in <code class="docutils literal notranslate"><span class="pre">utils/release-checklist</span></code>.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/sphinx/doc/internals/release-process.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

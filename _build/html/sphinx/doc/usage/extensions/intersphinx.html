@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sphinx.ext.intersphinx – Link to other projects’ documentation &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-sphinx.ext.intersphinx">
+<span id="sphinx-ext-intersphinx-link-to-other-projects-documentation"></span><h1><a class="reference internal" href="#module-sphinx.ext.intersphinx" title="sphinx.ext.intersphinx: Link to other Sphinx documentation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sphinx.ext.intersphinx</span></code></a> – Link to other projects’ documentation<a class="headerlink" href="#module-sphinx.ext.intersphinx" title="Permalink to this headline">¶</a></h1>
+<div class="versionadded" id="index-0">
+<p><span class="versionmodified added">New in version 0.5.</span></p>
+</div>
+<p>This extension can generate automatic links to the documentation of objects in
+other projects.</p>
+<p>Usage is simple: whenever Sphinx encounters a cross-reference that has no
+matching target in the current documentation set, it looks for targets in the
+documentation sets configured in <a href="#id1"><span class="problematic" id="id2">:confval:`intersphinx_mapping`</span></a>.  A reference
+like <code class="docutils literal notranslate"><span class="pre">:py:class:`zipfile.ZipFile`</span></code> can then link to the Python documentation
+for the ZipFile class, without you having to specify where it is located
+exactly.</p>
+<p>When using the “new” format (see below), you can even force lookup in a foreign
+set by prefixing the link target appropriately.  A link like <code class="docutils literal notranslate"><span class="pre">:ref:`comparison</span>
+<span class="pre">manual</span> <span class="pre">&lt;python:comparisons&gt;`</span></code> will then link to the label “comparisons” in the
+doc set “python”, if it exists.</p>
+<p>Behind the scenes, this works as follows:</p>
+<ul class="simple">
+<li><p>Each Sphinx HTML build creates a file named <code class="file docutils literal notranslate"><span class="pre">objects.inv</span></code> that contains
+a mapping from object names to URIs relative to the HTML set’s root.</p></li>
+<li><p>Projects using the Intersphinx extension can specify the location of such
+mapping files in the <a href="#id3"><span class="problematic" id="id4">:confval:`intersphinx_mapping`</span></a> config value.  The mapping
+will then be used to resolve otherwise missing references to objects into
+links to the other documentation.</p></li>
+<li><p>By default, the mapping file is assumed to be at the same location as the rest
+of the documentation; however, the location of the mapping file can also be
+specified individually, e.g. if the docs should be buildable without Internet
+access.</p></li>
+</ul>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>To use Intersphinx linking, add <code class="docutils literal notranslate"><span class="pre">'sphinx.ext.intersphinx'</span></code> to your
+<a href="#id5"><span class="problematic" id="id6">:confval:`extensions`</span></a> config value, and use these config values to activate
+linking:</p>
+</div>
+<div class="section" id="showing-all-links-of-an-intersphinx-mapping-file">
+<h2>Showing all links of an Intersphinx mapping file<a class="headerlink" href="#showing-all-links-of-an-intersphinx-mapping-file" title="Permalink to this headline">¶</a></h2>
+<p>To show all Intersphinx links and their targets of an Intersphinx mapping file,
+run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-msphinx.ext.intersphinx</span> <span class="pre">url-or-path</span></code>.  This is helpful when
+searching for the root cause of a broken Intersphinx link in a documentation
+project. The following example prints the Intersphinx mapping of the Python 3
+documentation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -msphinx.ext.intersphinx https://docs.python.org/3/objects.inv
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-intersphinx-with-inventory-file-under-basic-authorization">
+<h2>Using Intersphinx with inventory file under Basic Authorization<a class="headerlink" href="#using-intersphinx-with-inventory-file-under-basic-authorization" title="Permalink to this headline">¶</a></h2>
+<p>Intersphinx supports Basic Authorization like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">intersphinx_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;https://user:password@docs.python.org/3&#39;</span><span class="p">,</span>
+                                  <span class="kc">None</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>The user and password will be stripped from the URL when generating the links.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../_sources/sphinx/doc/usage/extensions/intersphinx.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

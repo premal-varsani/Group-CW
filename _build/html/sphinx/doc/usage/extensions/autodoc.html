@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sphinx.ext.autodoc – Include documentation from docstrings &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-sphinx.ext.autodoc">
+<span id="sphinx-ext-autodoc-include-documentation-from-docstrings"></span><h1><a class="reference internal" href="#module-sphinx.ext.autodoc" title="sphinx.ext.autodoc: Include documentation from docstrings."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sphinx.ext.autodoc</span></code></a> – Include documentation from docstrings<a class="headerlink" href="#module-sphinx.ext.autodoc" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">This extension can import the modules you are documenting, and pull in
+documentation from docstrings in a semi-automatic way.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For Sphinx (actually, the Python interpreter that executes Sphinx) to find
+your module, it must be importable.  That means that the module or the
+package must be in one of the directories on <code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code> – adapt your
+<code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code> in the configuration file accordingly.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><a class="reference internal" href="#module-sphinx.ext.autodoc" title="sphinx.ext.autodoc: Include documentation from docstrings."><code class="xref py py-mod docutils literal notranslate"><span class="pre">autodoc</span></code></a> <strong>imports</strong> the modules to be documented.  If any
+modules have side effects on import, these will be executed by <code class="docutils literal notranslate"><span class="pre">autodoc</span></code>
+when <code class="docutils literal notranslate"><span class="pre">sphinx-build</span></code> is run.</p>
+<p>If you document scripts (as opposed to library modules), make sure their main
+routine is protected by a <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> condition.</p>
+</div>
+<p>For this to work, the docstrings must of course be written in correct
+reStructuredText.  You can then use all of the usual Sphinx markup in the
+docstrings, and it will end up correctly in the documentation.  Together with
+hand-written documentation, this technique eases the pain of having to maintain
+two locations for documentation, while at the same time avoiding
+auto-generated-looking pure API documentation.</p>
+<p>If you prefer <a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">NumPy</a> or <a class="reference external" href="https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings">Google</a> style docstrings over reStructuredText,
+you can also enable the <a class="reference internal" href="napoleon.html#module-sphinx.ext.napoleon" title="sphinx.ext.napoleon: Support for NumPy and Google style docstrings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">napoleon</span></code></a> extension.
+<a class="reference internal" href="napoleon.html#module-sphinx.ext.napoleon" title="sphinx.ext.napoleon: Support for NumPy and Google style docstrings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">napoleon</span></code></a> is a preprocessor that converts your
+docstrings to correct reStructuredText before <code class="xref py py-mod docutils literal notranslate"><span class="pre">autodoc</span></code> processes them.</p>
+<div class="section" id="directives">
+<h2>Directives<a class="headerlink" href="#directives" title="Permalink to this headline">¶</a></h2>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">autodoc</span></code> provides several directives that are versions of the usual
+<a class="reference internal" href="../restructuredtext/domains.html#directive-py-module" title="py:module directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">py:module</span></code></a>, <a class="reference internal" href="../restructuredtext/domains.html#directive-py-class" title="py:class directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">py:class</span></code></a> and so forth.  On parsing time, they
+import the corresponding module and extract the docstring of the given objects,
+inserting them into the page source under a suitable <a class="reference internal" href="../restructuredtext/domains.html#directive-py-module" title="py:module directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">py:module</span></code></a>,
+<a class="reference internal" href="../restructuredtext/domains.html#directive-py-class" title="py:class directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">py:class</span></code></a> etc.  directive.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Just as <a class="reference internal" href="../restructuredtext/domains.html#directive-py-class" title="py:class directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">py:class</span></code></a> respects the current <a class="reference internal" href="../restructuredtext/domains.html#directive-py-module" title="py:module directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">py:module</span></code></a>,
+<a class="reference internal" href="#directive-autoclass" title="autoclass directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autoclass</span></code></a> will also do so.  Likewise, <a class="reference internal" href="#directive-automethod" title="automethod directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">automethod</span></code></a> will
+respect the current <a class="reference internal" href="../restructuredtext/domains.html#directive-py-class" title="py:class directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">py:class</span></code></a>.</p>
+</div>
+<dl class="rst directive">
+<dt id="directive-automodule">
+<code class="sig-name descname">.. automodule::</code><a class="headerlink" href="#directive-automodule" title="Permalink to this definition">¶</a></dt>
+<dt id="directive-autoclass">
+<code class="sig-name descname">.. autoclass::</code><a class="headerlink" href="#directive-autoclass" title="Permalink to this definition">¶</a></dt>
+<dt id="directive-autoexception">
+<code class="sig-name descname">.. autoexception::</code><a class="headerlink" href="#directive-autoexception" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document a module, class or exception.  All three directives will by default
+only insert the docstring of the object itself:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> Noodle
+</pre></div>
+</div>
+<p>will produce source like this:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">class</span><span class="p">::</span> Noodle
+
+   Noodle&#39;s docstring.
+</pre></div>
+</div>
+<p>The “auto” directives can also contain content of their own, it will be
+inserted into the resulting non-auto directive source after the docstring
+(but before any automatic member documentation).</p>
+<p>Therefore, you can also mix automatic and non-automatic member documentation,
+like so:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> Noodle
+   <span class="nc">:members:</span> <span class="nf">eat, slurp</span>
+
+<span class="p">   ..</span> <span class="ow">method</span><span class="p">::</span> boil(time=10)
+
+      Boil the noodle <span class="ge">*time*</span> minutes.
+</pre></div>
+</div>
+<p><strong>Options and advanced usage</strong></p>
+<ul>
+<li><p>If you want to automatically document members, there’s a <code class="docutils literal notranslate"><span class="pre">members</span></code>
+option:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> noodle
+   <span class="nc">:members:</span>
+</pre></div>
+</div>
+<p>will document all module members (recursively), and</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> Noodle
+   <span class="nc">:members:</span>
+</pre></div>
+</div>
+<p>will document all non-private member functions and properties (that is,
+those whose name doesn’t start with <code class="docutils literal notranslate"><span class="pre">_</span></code>).</p>
+<p>For modules, <code class="docutils literal notranslate"><span class="pre">__all__</span></code> will be respected when looking for members unless
+you give the <code class="docutils literal notranslate"><span class="pre">ignore-module-all</span></code> flag option.  Without
+<code class="docutils literal notranslate"><span class="pre">ignore-module-all</span></code>, the order of the members will also be the order in
+<code class="docutils literal notranslate"><span class="pre">__all__</span></code>.</p>
+<p>You can also give an explicit list of members; only these will then be
+documented:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> Noodle
+   <span class="nc">:members:</span> <span class="nf">eat, slurp</span>
+</pre></div>
+</div>
+</li>
+<li><p>If you want to make the <code class="docutils literal notranslate"><span class="pre">members</span></code> option (or other options described
+below) the default, see <a href="#id1"><span class="problematic" id="id2">:confval:`autodoc_default_options`</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use a negated form, <code class="samp docutils literal notranslate"><span class="pre">'no-</span><em><span class="pre">flag</span></em><span class="pre">'</span></code>, as an option of
+autodoc directive, to disable it temporarily.  For example:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> foo
+   <span class="nc">:no-undoc-members:</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Members without docstrings will be left out, unless you give the
+<code class="docutils literal notranslate"><span class="pre">undoc-members</span></code> flag option:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> noodle
+   <span class="nc">:members:</span>
+   <span class="nc">:undoc-members:</span>
+</pre></div>
+</div>
+</li>
+<li><p>“Private” members (that is, those named like <code class="docutils literal notranslate"><span class="pre">_private</span></code> or <code class="docutils literal notranslate"><span class="pre">__private</span></code>)
+will be included if the <code class="docutils literal notranslate"><span class="pre">private-members</span></code> flag option is given:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> noodle
+   <span class="nc">:members:</span>
+   <span class="nc">:private-members:</span>
+</pre></div>
+</div>
+<p>It can also take an explicit list of member names to be documented as
+arguments:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> noodle
+   <span class="nc">:members:</span>
+   <span class="nc">:private-members:</span> <span class="nf">_spicy, _garlickly</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.1.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.2: </span>The option can now take arguments.</p>
+</div>
+</li>
+<li><p>autodoc considers a member private if its docstring contains
+<code class="docutils literal notranslate"><span class="pre">:meta</span> <span class="pre">private:</span></code> in its <a class="reference internal" href="../restructuredtext/domains.html#info-field-lists"><span class="std std-ref">Info field lists</span></a>.
+For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">my_arg</span><span class="p">,</span> <span class="n">my_other_arg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;blah blah blah</span>
+
+<span class="sd">    :meta private:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.0.</span></p>
+</div>
+</li>
+<li><p>autodoc considers a member public if its docstring contains
+<code class="docutils literal notranslate"><span class="pre">:meta</span> <span class="pre">public:</span></code> in its <a class="reference internal" href="../restructuredtext/domains.html#info-field-lists"><span class="std std-ref">Info field lists</span></a>, even if it starts with
+an underscore.
+For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_my_function</span><span class="p">(</span><span class="n">my_arg</span><span class="p">,</span> <span class="n">my_other_arg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;blah blah blah</span>
+
+<span class="sd">    :meta public:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.1.</span></p>
+</div>
+</li>
+<li><p>autodoc considers a variable member does not have any default value if its
+docstring contains <code class="docutils literal notranslate"><span class="pre">:meta</span> <span class="pre">hide-value:</span></code> in its <a class="reference internal" href="../restructuredtext/domains.html#info-field-lists"><span class="std std-ref">Info field lists</span></a>.
+Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">var1</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1">#: :meta hide-value:</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 3.5.</span></p>
+</div>
+</li>
+<li><p>Python “special” members (that is, those named like <code class="docutils literal notranslate"><span class="pre">__special__</span></code>) will
+be included if the <code class="docutils literal notranslate"><span class="pre">special-members</span></code> flag option is given:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> my.Class
+   <span class="nc">:members:</span>
+   <span class="nc">:private-members:</span>
+   <span class="nc">:special-members:</span>
+</pre></div>
+</div>
+<p>would document both “private” and “special” members of the class.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.1.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.2: </span>The option can now take arguments, i.e. the special members to document.</p>
+</div>
+</li>
+<li><p>For classes and exceptions, members inherited from base classes will be
+left out when documenting all members, unless you give the
+<code class="docutils literal notranslate"><span class="pre">inherited-members</span></code> option, in addition to <code class="docutils literal notranslate"><span class="pre">members</span></code>:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> Noodle
+   <span class="nc">:members:</span>
+   <span class="nc">:inherited-members:</span>
+</pre></div>
+</div>
+<p>This can be combined with <code class="docutils literal notranslate"><span class="pre">undoc-members</span></code> to document <em>all</em> available
+members of the class or module.</p>
+<p>It can take an ancestor class not to document inherited members from it.
+By default, members of <code class="docutils literal notranslate"><span class="pre">object</span></code> class are not documented.  To show them
+all, give <code class="docutils literal notranslate"><span class="pre">None</span></code> to the option.</p>
+<p>For example; If your class <code class="docutils literal notranslate"><span class="pre">Foo</span></code> is derived from <code class="docutils literal notranslate"><span class="pre">list</span></code> class and
+you don’t want to document <code class="docutils literal notranslate"><span class="pre">list.__len__()</span></code>, you should specify a
+option <code class="docutils literal notranslate"><span class="pre">:inherited-members:</span> <span class="pre">list</span></code> to avoid special members of list
+class.</p>
+<p>Another example; If your class Foo has <code class="docutils literal notranslate"><span class="pre">__str__</span></code> special method and
+autodoc directive has both <code class="docutils literal notranslate"><span class="pre">inherited-members</span></code> and <code class="docutils literal notranslate"><span class="pre">special-members</span></code>,
+<code class="docutils literal notranslate"><span class="pre">__str__</span></code> will be documented as in the past, but other special method
+that are not implemented in your class <code class="docutils literal notranslate"><span class="pre">Foo</span></code>.</p>
+<p>Note: this will lead to markup errors if the inherited members come from a
+module whose docstrings are not reST formatted.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.3.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.0: </span>It takes an ancestor class name as an argument.</p>
+</div>
+</li>
+<li><p>It’s possible to override the signature for explicitly documented callable
+objects (functions, methods, classes) with the regular syntax that will
+override the signature gained from introspection:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> Noodle(type)
+
+<span class="p">   ..</span> <span class="ow">automethod</span><span class="p">::</span> eat(persona)
+</pre></div>
+</div>
+<p>This is useful if the signature from the method is hidden by a decorator.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.</span></p>
+</div>
+</li>
+<li><p>The <a class="reference internal" href="#directive-automodule" title="automodule directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">automodule</span></code></a>, <a class="reference internal" href="#directive-autoclass" title="autoclass directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autoclass</span></code></a> and
+<a class="reference internal" href="#directive-autoexception" title="autoexception directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autoexception</span></code></a> directives also support a flag option called
+<code class="docutils literal notranslate"><span class="pre">show-inheritance</span></code>.  When given, a list of base classes will be inserted
+just below the class signature (when used with <a class="reference internal" href="#directive-automodule" title="automodule directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">automodule</span></code></a>, this
+will be inserted for every class that is documented in the module).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.</span></p>
+</div>
+</li>
+<li><p>All autodoc directives support the <code class="docutils literal notranslate"><span class="pre">noindex</span></code> flag option that has the
+same effect as for standard <a class="reference internal" href="../restructuredtext/domains.html#directive-py-function" title="py:function directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">py:function</span></code></a> etc. directives: no
+index entries are generated for the documented object (and all
+autodocumented members).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.4.</span></p>
+</div>
+</li>
+<li><p><a class="reference internal" href="#directive-automodule" title="automodule directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">automodule</span></code></a> also recognizes the <code class="docutils literal notranslate"><span class="pre">synopsis</span></code>, <code class="docutils literal notranslate"><span class="pre">platform</span></code> and
+<code class="docutils literal notranslate"><span class="pre">deprecated</span></code> options that the standard <a class="reference internal" href="../restructuredtext/domains.html#directive-py-module" title="py:module directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">py:module</span></code></a> directive
+supports.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.5.</span></p>
+</div>
+</li>
+<li><p><a class="reference internal" href="#directive-automodule" title="automodule directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">automodule</span></code></a> and <a class="reference internal" href="#directive-autoclass" title="autoclass directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autoclass</span></code></a> also has an <code class="docutils literal notranslate"><span class="pre">member-order</span></code>
+option that can be used to override the global value of
+<a href="#id3"><span class="problematic" id="id4">:confval:`autodoc_member_order`</span></a> for one directive.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.6.</span></p>
+</div>
+</li>
+<li><p>The directives supporting member documentation also have a
+<code class="docutils literal notranslate"><span class="pre">exclude-members</span></code> option that can be used to exclude single member names
+from documentation, if all members are to be documented.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.6.</span></p>
+</div>
+</li>
+<li><p>In an <a class="reference internal" href="#directive-automodule" title="automodule directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">automodule</span></code></a> directive with the <code class="docutils literal notranslate"><span class="pre">members</span></code> option set, only
+module members whose <code class="docutils literal notranslate"><span class="pre">__module__</span></code> attribute is equal to the module name
+as given to <code class="docutils literal notranslate"><span class="pre">automodule</span></code> will be documented.  This is to prevent
+documentation of imported classes or functions.  Set the
+<code class="docutils literal notranslate"><span class="pre">imported-members</span></code> option if you want to prevent this behavior and
+document all available members.  Note that attributes from imported modules
+will not be documented, because attribute documentation is discovered by
+parsing the source file of the current module.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.2.</span></p>
+</div>
+</li>
+<li><p>Add a list of modules in the <a href="#id5"><span class="problematic" id="id6">:confval:`autodoc_mock_imports`</span></a> to prevent
+import errors to halt the building process when some external dependencies
+are not importable at build time.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.</span></p>
+</div>
+</li>
+<li><p>As a hint to autodoc extension, you can put a <code class="docutils literal notranslate"><span class="pre">::</span></code> separator in between
+module name and object name to let autodoc know the correct module name if
+it is ambiguous.</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autoclass</span><span class="p">::</span> module.name::Noodle
+</pre></div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="rst directive">
+<dt id="directive-autofunction">
+<code class="sig-name descname">.. autofunction::</code><a class="headerlink" href="#directive-autofunction" title="Permalink to this definition">¶</a></dt>
+<dt id="directive-autodecorator">
+<code class="sig-name descname">.. autodecorator::</code><a class="headerlink" href="#directive-autodecorator" title="Permalink to this definition">¶</a></dt>
+<dt id="directive-autodata">
+<code class="sig-name descname">.. autodata::</code><a class="headerlink" href="#directive-autodata" title="Permalink to this definition">¶</a></dt>
+<dt id="directive-automethod">
+<code class="sig-name descname">.. automethod::</code><a class="headerlink" href="#directive-automethod" title="Permalink to this definition">¶</a></dt>
+<dt id="directive-autoattribute">
+<code class="sig-name descname">.. autoattribute::</code><a class="headerlink" href="#directive-autoattribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>These work exactly like <a class="reference internal" href="#directive-autoclass" title="autoclass directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autoclass</span></code></a> etc.,
+but do not offer the options used for automatic member documentation.</p>
+<p><a class="reference internal" href="#directive-autodata" title="autodata directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autodata</span></code></a> and <a class="reference internal" href="#directive-autoattribute" title="autoattribute directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autoattribute</span></code></a> support the <code class="docutils literal notranslate"><span class="pre">annotation</span></code>
+option.  The option controls how the value of variable is shown.  If specified
+without arguments, only the name of the variable will be printed, and its value
+is not shown:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autodata</span><span class="p">::</span> CD_DRIVE
+   <span class="nc">:annotation:</span>
+</pre></div>
+</div>
+<p>If the option specified with arguments, it is printed after the name as a value
+of the variable:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autodata</span><span class="p">::</span> CD_DRIVE
+   <span class="nc">:annotation:</span> <span class="nf">= your CD device name</span>
+</pre></div>
+</div>
+<p>By default, without <code class="docutils literal notranslate"><span class="pre">annotation</span></code> option, Sphinx tries to obtain the value of
+the variable and print it after the name.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">no-value</span></code> option can be used instead of a blank <code class="docutils literal notranslate"><span class="pre">annotation</span></code> to show the
+type hint but not the value:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">autodata</span><span class="p">::</span> CD_DRIVE
+   <span class="nc">:no-value:</span>
+</pre></div>
+</div>
+<p>If both the <code class="docutils literal notranslate"><span class="pre">annotation</span></code> and <code class="docutils literal notranslate"><span class="pre">no-value</span></code> options are used, <code class="docutils literal notranslate"><span class="pre">no-value</span></code> has no
+effect.</p>
+<p>For module data members and class attributes, documentation can either be put
+into a comment with special formatting (using a <code class="docutils literal notranslate"><span class="pre">#:</span></code> to start the comment
+instead of just <code class="docutils literal notranslate"><span class="pre">#</span></code>), or in a docstring <em>after</em> the definition.  Comments
+need to be either on a line of their own <em>before</em> the definition, or
+immediately after the assignment <em>on the same line</em>.  The latter form is
+restricted to one line only.</p>
+<p>This means that in the following class definition, all attributes can be
+autodocumented:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span>class Foo:
+    &quot;&quot;&quot;Docstring for class Foo.&quot;&quot;&quot;
+
+    #: Doc comment for class attribute Foo.bar.
+    #: It can have multiple lines.
+    bar = 1
+
+    flox = 1.5   #: Doc comment for Foo.flox. One line only.
+
+    baz = 2
+    &quot;&quot;&quot;Docstring for class attribute Foo.baz.&quot;&quot;&quot;
+
+    def __init__(self):
+        #: Doc comment for instance attribute qux.
+        self.qux = 3
+
+        self.spam = 4
+        &quot;&quot;&quot;Docstring for instance attribute spam.&quot;&quot;&quot;
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.6: </span><a class="reference internal" href="#directive-autodata" title="autodata directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autodata</span></code></a> and <a class="reference internal" href="#directive-autoattribute" title="autoattribute directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autoattribute</span></code></a> can now extract
+docstrings.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.1: </span>Comment docs are now allowed on the same line after an assignment.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.2: </span><a class="reference internal" href="#directive-autodata" title="autodata directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autodata</span></code></a> and <a class="reference internal" href="#directive-autoattribute" title="autoattribute directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autoattribute</span></code></a> have an <code class="docutils literal notranslate"><span class="pre">annotation</span></code>
+option.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 2.0: </span><a class="reference internal" href="#directive-autodecorator" title="autodecorator directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autodecorator</span></code></a> added.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 3.4: </span><a class="reference internal" href="#directive-autodata" title="autodata directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autodata</span></code></a> and <a class="reference internal" href="#directive-autoattribute" title="autoattribute directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">autoattribute</span></code></a> now have a <code class="docutils literal notranslate"><span class="pre">no-value</span></code>
+option.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you document decorated functions or methods, keep in mind that autodoc
+retrieves its docstrings by importing the module and inspecting the
+<code class="docutils literal notranslate"><span class="pre">__doc__</span></code> attribute of the given function or method.  That means that if
+a decorator replaces the decorated function with another, it must copy the
+original <code class="docutils literal notranslate"><span class="pre">__doc__</span></code> to the new function.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>There are also config values that you can set:</p>
+</div>
+<div class="section" id="docstring-preprocessing">
+<h2>Docstring preprocessing<a class="headerlink" href="#docstring-preprocessing" title="Permalink to this headline">¶</a></h2>
+<p>autodoc provides the following additional events:</p>
+<p>The <a class="reference internal" href="#module-sphinx.ext.autodoc" title="sphinx.ext.autodoc: Include documentation from docstrings."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sphinx.ext.autodoc</span></code></a> module provides factory functions for commonly
+needed docstring processing in event <a href="#id7"><span class="problematic" id="id8">:event:`autodoc-process-docstring`</span></a>:</p>
+</div>
+<div class="section" id="skipping-members">
+<h2>Skipping members<a class="headerlink" href="#skipping-members" title="Permalink to this headline">¶</a></h2>
+<p>autodoc allows the user to define a custom method for determining whether a
+member should be included in the documentation by using the following event:</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../_sources/sphinx/doc/usage/extensions/autodoc.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

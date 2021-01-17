@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuration &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-conf">
+<span id="configuration"></span><span id="build-config"></span><h1>Configuration<a class="headerlink" href="#module-conf" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="../glossary.html#term-configuration-directory"><span class="xref std std-term">configuration directory</span></a> must contain a file named <code class="file docutils literal notranslate"><span class="pre">conf.py</span></code>.
+This file (containing Python code) is called the “build configuration file”
+and contains (almost) all configuration needed to customize Sphinx input
+and output behavior.</p>
+<blockquote>
+<div><p>An optional file <a class="reference external" href="http://docutils.sourceforge.net/docs/user/config.html">docutils.conf</a> can be added to the configuration
+directory to adjust <a class="reference external" href="http://docutils.sourceforge.net/">Docutils</a> configuration if not otherwise overridden or
+set by Sphinx.</p>
+</div></blockquote>
+<p>The configuration file is executed as Python code at build time (using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">execfile()</span></code>, and with the current directory set to its containing
+directory), and therefore can execute arbitrarily complex code.  Sphinx then
+reads simple names from the file’s namespace as its configuration.</p>
+<p>Important points to note:</p>
+<ul class="simple">
+<li><p>If not otherwise documented, values must be strings, and their default is the
+empty string.</p></li>
+<li><p>The term “fully-qualified name” refers to a string that names an importable
+Python object inside a module; for example, the FQN
+<code class="docutils literal notranslate"><span class="pre">&quot;sphinx.builders.Builder&quot;</span></code> means the <code class="docutils literal notranslate"><span class="pre">Builder</span></code> class in the
+<code class="docutils literal notranslate"><span class="pre">sphinx.builders</span></code> module.</p></li>
+<li><p>Remember that document names use <code class="docutils literal notranslate"><span class="pre">/</span></code> as the path separator and don’t
+contain the file name extension.</p></li>
+<li><p>Since <code class="file docutils literal notranslate"><span class="pre">conf.py</span></code> is read as a Python file, the usual rules apply for
+encodings and Unicode support.</p></li>
+<li><p>The contents of the config namespace are pickled (so that Sphinx can find out
+when configuration changes), so it may not contain unpickleable values –
+delete them from the namespace with <code class="docutils literal notranslate"><span class="pre">del</span></code> if appropriate.  Modules are
+removed automatically, so you don’t need to <code class="docutils literal notranslate"><span class="pre">del</span></code> your imports after use.</p>
+</li>
+<li id="conf-tags"><p>There is a special object named <code class="docutils literal notranslate"><span class="pre">tags</span></code> available in the config file.
+It can be used to query and change the tags (see <a class="reference internal" href="restructuredtext/directives.html#tags"><span class="std std-ref">Including content based on tags</span></a>).  Use
+<code class="docutils literal notranslate"><span class="pre">tags.has('tag')</span></code> to query, <code class="docutils literal notranslate"><span class="pre">tags.add('tag')</span></code> and <code class="docutils literal notranslate"><span class="pre">tags.remove('tag')</span></code>
+to change. Only tags set via the <code class="docutils literal notranslate"><span class="pre">-t</span></code> command-line option or via
+<code class="docutils literal notranslate"><span class="pre">tags.add('tag')</span></code> can be queried using <code class="docutils literal notranslate"><span class="pre">tags.has('tag')</span></code>.
+Note that the current builder tag is not available in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>, as it is
+created <em>after</em> the builder is initialized.</p></li>
+</ul>
+<div class="section" id="project-information">
+<h2>Project information<a class="headerlink" href="#project-information" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="general-configuration">
+<h2>General configuration<a class="headerlink" href="#general-configuration" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="options-for-internationalization">
+<span id="intl-options"></span><h2>Options for internationalization<a class="headerlink" href="#options-for-internationalization" title="Permalink to this headline">¶</a></h2>
+<p>These options influence Sphinx’s <em>Native Language Support</em>.  See the
+documentation on <a class="reference internal" href="advanced/intl.html#intl"><span class="std std-ref">Internationalization</span></a> for details.</p>
+</div>
+<div class="section" id="options-for-math">
+<span id="math-options"></span><h2>Options for Math<a class="headerlink" href="#options-for-math" title="Permalink to this headline">¶</a></h2>
+<p>These options influence Math notations.</p>
+</div>
+<div class="section" id="options-for-html-output">
+<span id="html-options"></span><h2>Options for HTML output<a class="headerlink" href="#options-for-html-output" title="Permalink to this headline">¶</a></h2>
+<p>These options influence HTML as well as HTML Help output, and other builders
+that use Sphinx’s HTMLWriter class.</p>
+</div>
+<div class="section" id="options-for-single-html-output">
+<h2>Options for Single HTML output<a class="headerlink" href="#options-for-single-html-output" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="options-for-html-help-output">
+<span id="htmlhelp-options"></span><h2>Options for HTML help output<a class="headerlink" href="#options-for-html-help-output" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="options-for-apple-help-output">
+<span id="applehelp-options"></span><h2>Options for Apple Help output<a class="headerlink" href="#options-for-apple-help-output" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.</span></p>
+</div>
+<p>These options influence the Apple Help output.  This builder derives from the
+HTML builder, so the HTML options also apply where appropriate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Apple Help output will only work on Mac OS X 10.6 and higher, as it
+requires the <strong class="program">hiutil</strong> and <strong class="program">codesign</strong> command line tools,
+neither of which are Open Source.</p>
+<p>You can disable the use of these tools using
+<a href="#id1"><span class="problematic" id="id2">:confval:`applehelp_disable_external_tools`</span></a>, but the result will not be a
+valid help book until the indexer is run over the <code class="docutils literal notranslate"><span class="pre">.lproj</span></code> folders within
+the bundle.</p>
+</div>
+</div>
+<div class="section" id="options-for-epub-output">
+<span id="epub-options"></span><h2>Options for epub output<a class="headerlink" href="#options-for-epub-output" title="Permalink to this headline">¶</a></h2>
+<p>These options influence the epub output.  As this builder derives from the HTML
+builder, the HTML options also apply where appropriate.  The actual values for
+some of the options is not really important, they just have to be entered into
+the <a class="reference external" href="http://dublincore.org/">Dublin Core metadata</a>.</p>
+</div>
+<div class="section" id="options-for-latex-output">
+<span id="latex-options"></span><h2>Options for LaTeX output<a class="headerlink" href="#options-for-latex-output" title="Permalink to this headline">¶</a></h2>
+<p>These options influence LaTeX output.</p>
+</div>
+<div class="section" id="options-for-text-output">
+<span id="text-options"></span><h2>Options for text output<a class="headerlink" href="#options-for-text-output" title="Permalink to this headline">¶</a></h2>
+<p>These options influence text output.</p>
+</div>
+<div class="section" id="options-for-manual-page-output">
+<span id="man-options"></span><h2>Options for manual page output<a class="headerlink" href="#options-for-manual-page-output" title="Permalink to this headline">¶</a></h2>
+<p>These options influence manual page output.</p>
+</div>
+<div class="section" id="options-for-texinfo-output">
+<span id="texinfo-options"></span><h2>Options for Texinfo output<a class="headerlink" href="#options-for-texinfo-output" title="Permalink to this headline">¶</a></h2>
+<p>These options influence Texinfo output.</p>
+</div>
+<div class="section" id="options-for-qthelp-output">
+<span id="qthelp-options"></span><h2>Options for QtHelp output<a class="headerlink" href="#options-for-qthelp-output" title="Permalink to this headline">¶</a></h2>
+<p>These options influence qthelp output.  As this builder derives from the HTML
+builder, the HTML options also apply where appropriate.</p>
+</div>
+<div class="section" id="options-for-the-linkcheck-builder">
+<h2>Options for the linkcheck builder<a class="headerlink" href="#options-for-the-linkcheck-builder" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="options-for-the-xml-builder">
+<h2>Options for the XML builder<a class="headerlink" href="#options-for-the-xml-builder" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets">1</span></dt>
+<dd><p>A note on available globbing syntax: you can use the standard shell
+constructs <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">?</span></code>, <code class="docutils literal notranslate"><span class="pre">[...]</span></code> and <code class="docutils literal notranslate"><span class="pre">[!...]</span></code> with the feature that
+these all don’t match slashes.  A double star <code class="docutils literal notranslate"><span class="pre">**</span></code> can be used to
+match any sequence of characters <em>including</em> slashes.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="options-for-the-c-domain">
+<span id="c-config"></span><h2>Options for the C domain<a class="headerlink" href="#options-for-the-c-domain" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="cpp-config">
+<span id="id4"></span><h2>Options for the C++ domain<a class="headerlink" href="#cpp-config" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example-of-configuration-file">
+<h3>Example of configuration file<a class="headerlink" href="#example-of-configuration-file" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/sphinx/doc/usage/configuration.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

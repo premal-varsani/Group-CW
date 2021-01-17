@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math support for HTML outputs in Sphinx &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-sphinx.ext.mathbase">
+<span id="math-support-for-html-outputs-in-sphinx"></span><span id="math-support"></span><h1>Math support for HTML outputs in Sphinx<a class="headerlink" href="#module-sphinx.ext.mathbase" title="Permalink to this headline">¶</a></h1>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.5.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.8: </span>Math support for non-HTML builders is integrated to sphinx-core.
+So mathbase extension is no longer needed.</p>
+</div>
+<p>Since mathematical notation isn’t natively supported by HTML in any way, Sphinx
+gives a math support to HTML document with several extensions.  These use the
+reStructuredText math <a class="reference internal" href="../restructuredtext/directives.html#directive-math" title="math directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">directive</span></code></a> and <a class="reference internal" href="../restructuredtext/roles.html#role-math" title="math role"><code class="xref rst rst-role docutils literal notranslate"><span class="pre">role</span></code></a>.</p>
+<div class="section" id="module-sphinx.ext.imgmath">
+<span id="sphinx-ext-imgmath-render-math-as-images"></span><h2><a class="reference internal" href="#module-sphinx.ext.imgmath" title="sphinx.ext.imgmath: Render math as PNG or SVG images."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sphinx.ext.imgmath</span></code></a> – Render math as images<a class="headerlink" href="#module-sphinx.ext.imgmath" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.</span></p>
+</div>
+<p>This extension renders math via LaTeX and <a class="reference external" href="https://savannah.nongnu.org/projects/dvipng/">dvipng</a> or <a class="reference external" href="https://dvisvgm.de/">dvisvgm</a> into PNG or SVG
+images. This of course means that the computer where the docs are built must
+have both programs available.</p>
+<p>There are various configuration values you can set to influence how the images
+are built:</p>
+</div>
+<div class="section" id="module-sphinx.ext.mathjax">
+<span id="sphinx-ext-mathjax-render-math-via-javascript"></span><h2><a class="reference internal" href="#module-sphinx.ext.mathjax" title="sphinx.ext.mathjax: Render math using JavaScript via MathJax."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sphinx.ext.mathjax</span></code></a> – Render math via JavaScript<a class="headerlink" href="#module-sphinx.ext.mathjax" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.1.</span></p>
+</div>
+<p>This extension puts math as-is into the HTML files.  The JavaScript package
+<a class="reference external" href="https://www.mathjax.org/">MathJax</a> is then loaded and transforms the LaTeX markup to readable math live in
+the browser.</p>
+<p>Because MathJax (and the necessary fonts) is very large, it is not included in
+Sphinx but is set to automatically include it from a third-party site.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>You should use the math <a class="reference internal" href="../restructuredtext/directives.html#directive-math" title="math directive"><code class="xref rst rst-dir docutils literal notranslate"><span class="pre">directive</span></code></a> and
+<a class="reference internal" href="../restructuredtext/roles.html#role-math" title="math role"><code class="xref rst rst-role docutils literal notranslate"><span class="pre">role</span></code></a>, not the native MathJax <code class="docutils literal notranslate"><span class="pre">$$</span></code>, <code class="docutils literal notranslate"><span class="pre">\(</span></code>, etc.</p>
+</div>
+</div>
+<div class="section" id="module-sphinx.ext.jsmath">
+<span id="sphinx-ext-jsmath-render-math-via-javascript"></span><h2><a class="reference internal" href="#module-sphinx.ext.jsmath" title="sphinx.ext.jsmath: Render math using JavaScript via JSMath."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sphinx.ext.jsmath</span></code></a> – Render math via JavaScript<a class="headerlink" href="#module-sphinx.ext.jsmath" title="Permalink to this headline">¶</a></h2>
+<p>This extension works just as the MathJax extension does, but uses the older
+package <a class="reference external" href="http://www.math.union.edu/~dpvc/jsmath/">jsMath</a>.  It provides this config value:</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../_sources/sphinx/doc/usage/extensions/math.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

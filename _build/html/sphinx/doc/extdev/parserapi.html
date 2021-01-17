@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parser API &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="parser-api">
+<span id="id1"></span><h1>Parser API<a class="headerlink" href="#parser-api" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://docutils.sourceforge.net/docs/dev/hacking.html#parsing-the-document">The docutils documentation describes</a> parsers as follows:</p>
+<blockquote>
+<div><p>The Parser analyzes the input document and creates a node tree
+representation.</p>
+</div></blockquote>
+<p>In Sphinx, the parser modules works as same as docutils.  The parsers are
+registered to Sphinx by extensions using Application APIs;
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Sphinx.add_source_suffix()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Sphinx.add_source_parser()</span></code>.</p>
+<p>The <em>source suffix</em> is a mapping from file suffix to file type.  For example,
+<code class="docutils literal notranslate"><span class="pre">.rst</span></code> file is mapped to <code class="docutils literal notranslate"><span class="pre">'restructuredtext'</span></code> type.  Sphinx uses the
+file type to looking for parsers from registered list.  On searching,
+Sphinx refers to the <code class="docutils literal notranslate"><span class="pre">Parser.supported</span></code> attribute and picks up a parser
+which contains the file type in the attribute.</p>
+<p>The users can override the source suffix mappings using
+<a href="#id3"><span class="problematic" id="id4">:confval:`source_suffix`</span></a> like following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># a mapping from file suffix to file types</span>
+<span class="n">source_suffix</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;.rst&#39;</span><span class="p">:</span> <span class="s1">&#39;restructuredtext&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;.md&#39;</span><span class="p">:</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You should indicate file types your parser supports. This will allow users
+to configure their settings appropriately.</p>
+<span class="target" id="module-sphinx.parsers"></span></div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/sphinx/doc/extdev/parserapi.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reStructuredText &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="restructuredtext">
+<span id="rst-index"></span><h1>reStructuredText<a class="headerlink" href="#restructuredtext" title="Permalink to this headline">¶</a></h1>
+<p>reStructuredText (reST) is the default plaintext markup language used by both
+Docutils and Sphinx. Docutils provides the basic reStructuredText syntax, while
+Sphinx extends this to support additional functionality.</p>
+<p>The below guides go through the most important aspects of reST. For the
+authoritative reStructuredText reference, refer to the <a class="reference external" href="http://docutils.sourceforge.net/rst.html">docutils
+documentation</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">reStructuredText Primer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#paragraphs">Paragraphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#inline-markup">Inline markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#lists-and-quote-like-blocks">Lists and Quote-like blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#literal-blocks">Literal blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#doctest-blocks">Doctest blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#tables">Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#hyperlinks">Hyperlinks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#sections">Sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#field-lists">Field Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#roles">Roles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#explicit-markup">Explicit Markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#directives">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#images">Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#footnotes">Footnotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#citations">Citations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#substitutions">Substitutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#comments">Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#html-metadata">HTML Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#source-encoding">Source encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#gotchas">Gotchas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="roles.html">Roles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="roles.html#cross-referencing-syntax">Cross-referencing syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roles.html#math">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roles.html#other-semantic-markup">Other semantic markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="roles.html#substitutions">Substitutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="directives.html">Directives</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#table-of-contents">Table of contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#paragraph-level-markup">Paragraph-level markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#showing-code-examples">Showing code examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#glossary">Glossary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#meta-information-markup">Meta-information markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#index-generating-markup">Index-generating markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#including-content-based-on-tags">Including content based on tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#tables">Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#math">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directives.html#grammar-production-displays">Grammar production displays</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="field-lists.html">Field Lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="field-lists.html#file-wide-metadata">File-wide metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="field-lists.html#special-metadata-fields">Special metadata fields</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="domains.html">Domains</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="domains.html#basic-markup">Basic Markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domains.html#the-python-domain">The Python Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domains.html#the-c-domain">The C Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domains.html#cpp-domain">The C++ Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domains.html#the-standard-domain">The Standard Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domains.html#the-javascript-domain">The JavaScript Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domains.html#the-restructuredtext-domain">The reStructuredText domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domains.html#the-math-domain">The Math Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domains.html#more-domains">More domains</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../_sources/sphinx/doc/usage/restructuredtext/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

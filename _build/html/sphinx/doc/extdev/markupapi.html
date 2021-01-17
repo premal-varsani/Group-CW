@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docutils markup API &#8212; MPHY0021-2020-simulation-Working-Group-19 1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="docutils-markup-api">
+<h1>Docutils markup API<a class="headerlink" href="#docutils-markup-api" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the API for adding ReST markup elements (roles and
+directives).</p>
+<div class="section" id="roles">
+<h2>Roles<a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="directives">
+<h2>Directives<a class="headerlink" href="#directives" title="Permalink to this headline">¶</a></h2>
+<p>Directives are handled by classes derived from
+<code class="docutils literal notranslate"><span class="pre">docutils.parsers.rst.Directive</span></code>.  They have to be registered by an extension
+using <code class="xref py py-meth docutils literal notranslate"><span class="pre">Sphinx.add_directive()</span></code> or <code class="xref py py-meth docutils literal notranslate"><span class="pre">Sphinx.add_directive_to_domain()</span></code>.</p>
+<span class="target" id="module-docutils.parsers.rst"></span><dl class="py class">
+<dt id="docutils.parsers.rst.Directive">
+<em class="property">class </em><code class="sig-prename descclassname">docutils.parsers.rst.</code><code class="sig-name descname">Directive</code><a class="headerlink" href="#docutils.parsers.rst.Directive" title="Permalink to this definition">¶</a></dt>
+<dd><p>The markup syntax of the new directive is determined by the follow five class
+attributes:</p>
+<p>New directives must implement the <a class="reference internal" href="#docutils.parsers.rst.Directive.run" title="docutils.parsers.rst.Directive.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method:</p>
+<dl class="py method">
+<dt id="docutils.parsers.rst.Directive.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#docutils.parsers.rst.Directive.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method must process the directive arguments, options and content, and
+return a list of Docutils/Sphinx nodes that will be inserted into the
+document tree at the point where the directive was encountered.</p>
+</dd></dl>
+
+<p>Instance attributes that are always set on the directive are:</p>
+<dl class="py attribute">
+<dt id="docutils.parsers.rst.Directive.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#docutils.parsers.rst.Directive.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The directive name (useful when registering the same directive class under
+multiple names).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="docutils.parsers.rst.Directive.arguments">
+<code class="sig-name descname">arguments</code><a class="headerlink" href="#docutils.parsers.rst.Directive.arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>The arguments given to the directive, as a list.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="docutils.parsers.rst.Directive.options">
+<code class="sig-name descname">options</code><a class="headerlink" href="#docutils.parsers.rst.Directive.options" title="Permalink to this definition">¶</a></dt>
+<dd><p>The options given to the directive, as a dictionary mapping option names
+to validated/converted values.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="docutils.parsers.rst.Directive.content">
+<code class="sig-name descname">content</code><a class="headerlink" href="#docutils.parsers.rst.Directive.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>The directive content, if given, as a <code class="xref py py-class docutils literal notranslate"><span class="pre">ViewList</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="docutils.parsers.rst.Directive.lineno">
+<code class="sig-name descname">lineno</code><a class="headerlink" href="#docutils.parsers.rst.Directive.lineno" title="Permalink to this definition">¶</a></dt>
+<dd><p>The absolute line number on which the directive appeared.  This is not
+always a useful value; use <code class="xref py py-attr docutils literal notranslate"><span class="pre">srcline</span></code> instead.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="docutils.parsers.rst.Directive.content_offset">
+<code class="sig-name descname">content_offset</code><a class="headerlink" href="#docutils.parsers.rst.Directive.content_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal offset of the directive content.  Used when calling
+<code class="docutils literal notranslate"><span class="pre">nested_parse</span></code> (see below).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="docutils.parsers.rst.Directive.block_text">
+<code class="sig-name descname">block_text</code><a class="headerlink" href="#docutils.parsers.rst.Directive.block_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>The string containing the entire directive.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="docutils.parsers.rst.Directive.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#docutils.parsers.rst.Directive.state" title="Permalink to this definition">¶</a></dt>
+<dt id="docutils.parsers.rst.Directive.state_machine">
+<code class="sig-name descname">state_machine</code><a class="headerlink" href="#docutils.parsers.rst.Directive.state_machine" title="Permalink to this definition">¶</a></dt>
+<dd><p>The state and state machine which controls the parsing.  Used for
+<code class="docutils literal notranslate"><span class="pre">nested_parse</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="viewlists">
+<h3>ViewLists<a class="headerlink" href="#viewlists" title="Permalink to this headline">¶</a></h3>
+<p>Docutils represents document source lines in a class
+<code class="docutils literal notranslate"><span class="pre">docutils.statemachine.ViewList</span></code>.  This is a list with extended functionality
+– for one, slicing creates views of the original list, and also the list
+contains information about the source line numbers.</p>
+<p>The <a class="reference internal" href="#docutils.parsers.rst.Directive.content" title="docutils.parsers.rst.Directive.content"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Directive.content</span></code></a> attribute is a ViewList.  If you generate content
+to be parsed as ReST, you have to create a ViewList yourself.  Important for
+content generation are the following points:</p>
+<ul class="simple">
+<li><p>The constructor takes a list of strings (lines) and a source (document) name.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.append()</span></code> method takes a line and a source name as well.</p></li>
+</ul>
+</div>
+<div class="section" id="parsing-directive-content-as-rest">
+<h3>Parsing directive content as ReST<a class="headerlink" href="#parsing-directive-content-as-rest" title="Permalink to this headline">¶</a></h3>
+<p>Many directives will contain more markup that must be parsed.  To do this, use
+one of the following APIs from the <a class="reference internal" href="#docutils.parsers.rst.Directive.run" title="docutils.parsers.rst.Directive.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Directive.run()</span></code></a> method:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">self.state.nested_parse</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sphinx.util.nodes.nested_parse_with_titles()</span></code> – this allows titles in
+the parsed content.</p></li>
+</ul>
+<p>Both APIs parse the content into a given node. They are used like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">=</span> <span class="n">docutils</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">paragraph</span><span class="p">()</span>
+<span class="c1"># either</span>
+<span class="n">nested_parse_with_titles</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+<span class="c1"># or</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">nested_parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">sphinx.util.docutils.switch_source_input()</span></code> allows to change a target file
+during nested_parse.  It is useful to mixed contents.  For example, <code class="docutils literal notranslate"><span class="pre">sphinx.</span>
+<span class="pre">ext.autodoc</span></code> uses it to parse docstrings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sphinx.util.docutils</span> <span class="k">import</span> <span class="n">switch_source_input</span>
+
+<span class="c1"># Switch source_input between parsing content.</span>
+<span class="c1"># Inside this context, all parsing errors and warnings are reported as</span>
+<span class="c1"># happened in new source_input (in this case, ``self.result``).</span>
+<span class="k">with</span> <span class="n">switch_source_input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">):</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">docutils</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">paragraph</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">nested_parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.7: </span>Until Sphinx-1.6, <code class="docutils literal notranslate"><span class="pre">sphinx.ext.autodoc.AutodocReporter</span></code> is used for this
+purpose.  For now, it is replaced by <code class="docutils literal notranslate"><span class="pre">switch_source_input()</span></code>.</p>
+</div>
+</div>
+<p>If you don’t need the wrapping node, you can use any concrete node type and
+return <code class="docutils literal notranslate"><span class="pre">node.children</span></code> from the Directive.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="http://docutils.sourceforge.net/docs/howto/rst-directives.html">Creating directives</a> HOWTO of the Docutils documentation</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">MPHY0021-2020-simulation-Working-Group-19</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Working Group 19.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/sphinx/doc/extdev/markupapi.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
